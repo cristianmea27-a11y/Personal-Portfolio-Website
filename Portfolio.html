@@ -1,0 +1,820 @@
+<html>
+    <head>
+        <title>Personal Portfolio Website</title>
+
+    <style type="text/css">
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* MAIN PAGE */
+
+        body {
+            margin: 0;
+            padding: 0;
+
+            font-family: Arial, sans-serif;
+
+            color: #17233d;
+            background-color: #eef2f8;
+
+            transition: 0.3s;
+        }
+
+        body.dark {
+            color: #e8edf7;
+            background-color: #081326;
+        }
+
+
+        /* DARK MODE BUTTON */
+
+        #darkmd {
+            position: fixed;
+
+            top: 20px;
+            right: 20px;
+
+            padding: 10px 18px;
+
+            font-weight: bold;
+
+            color: white;
+            background-color: #142a52;
+
+            border: 1px solid #c9a84c;
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            z-index: 100;
+
+            transition: 0.3s;
+        }
+
+        #darkmd:hover {
+            background-color: #1e4078;
+        }
+
+        body.dark #darkmd {
+            color: #f5d77a;
+            background-color: #0d1d38;
+
+            border-color: #c9a84c;
+        }
+
+
+        /* HOME */
+
+        header {
+            text-align: center;
+
+            padding: 75px 20px 60px;
+
+            color: white;
+
+            background-color: #10264d;
+
+            border-bottom: 4px solid #c9a84c;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark header {
+            background-color: #061024;
+
+            border-bottom-color: #c9a84c;
+        }
+
+
+        /* PROFILE PICTURE */
+
+        header img {
+            width: 165px;
+            height: 165px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 4px solid #d4b45f;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 0 0 6px rgba(255, 255, 255, 0.08),
+                0 8px 25px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* HOME TEXT */
+
+        header h1 {
+            margin: 10px 0;
+
+            font-size: 36px;
+
+            letter-spacing: 1px;
+        }
+
+        header h2 {
+            margin: 5px 0;
+
+            font-size: 20px;
+
+            font-weight: normal;
+
+            color: #e0c66d;
+        }
+
+
+        /* SECTIONS */
+
+        section {
+            max-width: 900px;
+
+            margin: 30px auto;
+
+            padding: 30px;
+
+            background-color: white;
+
+            border-radius: 8px;
+
+            border: 1px solid #d4dce9;
+
+            border-top: 4px solid #17366b;
+
+            box-shadow:
+                0 4px 15px rgba(15, 35, 70, 0.08);
+
+            transition: 0.3s;
+        }
+
+        body.dark section {
+            background-color: #0e1c34;
+
+            border-color: #20385f;
+
+            border-top-color: #c9a84c;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* SECTION TITLES */
+
+        section h2 {
+            margin-top: 0;
+
+            padding-bottom: 10px;
+
+            color: #17366b;
+
+            border-bottom: 2px solid #c9a84c;
+        }
+
+        body.dark section h2 {
+            color: #e3c96b;
+
+            border-color: #c9a84c;
+        }
+
+
+        /* SKILLS */
+
+        .skills {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .skill {
+            padding: 10px 16px;
+
+            color: #17366b;
+
+            background-color: #edf2fa;
+
+            border: 1px solid #b9c7dc;
+
+            border-radius: 5px;
+
+            transition: 0.2s;
+        }
+
+        .skill:hover {
+            color: white;
+
+            background-color: #17366b;
+
+            border-color: #17366b;
+        }
+
+        body.dark .skill {
+            color: #dbe5f5;
+
+            background-color: #142747;
+
+            border-color: #304b76;
+        }
+
+        body.dark .skill:hover {
+            color: #071224;
+
+            background-color: #d4b45f;
+
+            border-color: #d4b45f;
+        }
+
+
+        /* PROJECTS */
+
+        .projects {
+            display: flex;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .project {
+            flex: 1;
+
+            min-width: 250px;
+
+            padding: 20px;
+
+            background-color: #f7f9fc;
+
+            border: 1px solid #d0d9e8;
+
+            border-left: 4px solid #17366b;
+
+            border-radius: 5px;
+
+            transition: 0.2s;
+        }
+
+        .project:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 5px 15px rgba(20, 50, 100, 0.12);
+        }
+
+        body.dark .project {
+            background-color: #132542;
+
+            border-color: #294368;
+
+            border-left-color: #c9a84c;
+        }
+
+        body.dark .project:hover {
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .project h3 {
+            margin-top: 0;
+
+            color: #17366b;
+        }
+
+        body.dark .project h3 {
+            color: #e0c66d;
+        }
+
+
+        /* CHATBOT */
+
+        #chatbot {
+            width: calc(100% - 90px);
+
+            padding: 12px;
+
+            font-family: Arial, sans-serif;
+
+            color: #17233d;
+
+            background-color: white;
+
+            border: 1px solid #aebbd0;
+
+            border-radius: 5px;
+
+            outline: none;
+        }
+
+        #chatbot:focus {
+            border-color: #17366b;
+
+            box-shadow:
+                0 0 0 2px rgba(23, 54, 107, 0.1);
+        }
+
+        body.dark #chatbot {
+            color: white;
+
+            background-color: #09172c;
+
+            border-color: #304b76;
+        }
+
+
+        /* ASK BUTTON */
+
+        #askbutton {
+            padding: 12px 18px;
+
+            font-weight: bold;
+
+            color: white;
+
+            background-color: #17366b;
+
+            border: none;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+        }
+
+        #askbutton:hover {
+            background-color: #244d8f;
+        }
+
+        body.dark #askbutton {
+            color: #081326;
+
+            background-color: #d4b45f;
+        }
+
+        body.dark #askbutton:hover {
+            background-color: #e3c96b;
+        }
+
+
+        /* CHAT ANSWER */
+
+        #chatanswer {
+            margin-top: 15px;
+
+            padding: 15px;
+
+            min-height: 45px;
+
+            background-color: #f3f6fb;
+
+            border: 1px solid #ccd6e5;
+
+            border-left: 4px solid #c9a84c;
+
+            border-radius: 4px;
+        }
+
+        body.dark #chatanswer {
+            background-color: #132542;
+
+            border-color: #294368;
+
+            border-left-color: #c9a84c;
+        }
+
+
+        /* CONTACT FORM */
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            margin-top: 5px;
+            margin-bottom: 15px;
+
+            font-family: Arial, sans-serif;
+
+            color: #17233d;
+
+            background-color: white;
+
+            border: 1px solid #aebbd0;
+
+            border-radius: 5px;
+
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #17366b;
+
+            box-shadow:
+                0 0 0 2px rgba(23, 54, 107, 0.08);
+        }
+
+        body.dark input,
+        body.dark textarea {
+            color: white;
+
+            background-color: #09172c;
+
+            border-color: #304b76;
+        }
+
+        textarea {
+            height: 120px;
+
+            resize: vertical;
+        }
+
+
+        /* SEND BUTTON */
+
+        form button {
+            padding: 12px 20px;
+
+            font-weight: bold;
+
+            color: white;
+
+            background-color: #17366b;
+
+            border: none;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #244d8f;
+        }
+
+        body.dark form button {
+            color: #081326;
+
+            background-color: #d4b45f;
+        }
+
+        body.dark form button:hover {
+            background-color: #e3c96b;
+        }
+
+
+        /* SOCIAL LINKS */
+
+        a {
+            color: #17366b;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #b08b25;
+
+            text-decoration: underline;
+        }
+
+        body.dark a {
+            color: #d9bd5d;
+        }
+
+        body.dark a:hover {
+            color: #f0d77d;
+        }
+
+
+        /* MOBILE */
+
+        @media screen and (max-width: 600px) {
+
+            body {
+                font-size: 15px;
+            }
+
+            #darkmd {
+                top: 10px;
+                right: 10px;
+
+                padding: 8px 12px;
+            }
+
+            header {
+                padding: 65px 15px 40px;
+            }
+
+            header img {
+                width: 135px;
+                height: 135px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            header h2 {
+                font-size: 17px;
+            }
+
+            section {
+                margin: 20px 10px;
+
+                padding: 20px;
+            }
+
+            section h2 {
+                font-size: 21px;
+            }
+
+            .projects {
+                flex-direction: column;
+            }
+
+            .project {
+                min-width: 100%;
+            }
+
+            #chatbot {
+                width: 100%;
+
+                margin-bottom: 10px;
+            }
+
+            #askbutton {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+    </head>
+
+
+    <body>
+
+        <button id="darkmd">Dark Mode</button>
+
+
+        <!-- HOME -->
+        <header id="home">
+
+            <!-- INSERT YOUR PROFILE PICTURE FILE NAME HERE -->
+            <img src="Profile-Pic.jpg" alt="Profile Picture">
+
+            <!-- INSERT YOUR NAME HERE -->
+            <h1>John Christian D Mea</h1>
+
+            <!-- INSERT YOUR PROFESSIONAL TITLE HERE -->
+            <h2>CS Student</h2>
+
+
+        </header>
+
+
+        <!-- ABOUT ME -->
+        <section id="about">
+
+            <h2>About Me</h2>
+
+            <!-- INSERT YOUR ABOUT ME DESCRIPTION HERE -->
+            <p>
+            Im currently learning key concepts in Programming like Web-development and databases
+            </p>
+
+            <!-- INSERT YOUR EDUCATION HERE -->
+            <p>
+                Education: BS Computer Science - 2nd Year
+            </p>
+
+        </section>
+
+
+        <!-- SKILLS -->
+        <section id="skills">
+
+            <h2>Skills</h2>
+
+            <div class="skills">
+
+                <!-- INSERT YOUR SKILLS HERE -->
+                <div class="skill">Web Development</div>
+                <div class="skill">Database Organization</div>
+                <div class="skill">Debugging</div>
+                <div class="skill">Database</div>
+                <div class="skill">Adaptation</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+        <section id="projects">
+
+            <h2>Projects</h2>
+
+            <div class="projects">
+
+                <div class="project">
+
+                    <!-- INSERT PROJECT 1 TITLE -->
+                    <h3>Automotive Shop Inventory System</h3>
+
+                    <!-- INSERT PROJECT 1 DESCRIPTION -->
+                    <p>
+                        An inventory system made to help the automotive shop to find products their tryingt o fint and find information about them
+                    </p>
+
+                </div>
+
+
+                <div class="project">
+
+                    <!-- INSERT PROJECT 2 TITLE -->
+                    <h3>LCC Payroll System</h3>
+
+                    <!-- INSERT PROJECT 2 DESCRIPTION -->
+                    <p>
+                        A system that keeps track of the payroll of every emplyee of LCC
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ASK ABOUT ME -->
+        <section id="questions">
+
+            <h2>Ask About Me</h2>
+
+            <p>
+                You can ask questions about me.
+            </p>
+
+            <p>
+                Try asking:
+                "What are your skills?",
+                "What are your projects?",
+                or "What are you studying?"
+            </p>
+
+            <input
+                type="text"
+                id="chatbot"
+                placeholder="Ask a question"
+            >
+
+            <button id="askbutton">Ask</button>
+
+            <div id="chatanswer"></div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact">
+
+            <h2>Contact Me</h2>
+
+            <!-- INSERT YOUR EMAIL HERE -->
+            <p>
+                Email:
+                cristianmea27@gmail.com
+            </p>
+
+
+            <p>
+                Social Media:
+
+                <!-- INSERT YOUR FACEBOOK LINK -->
+                <a href="https://www.facebook.com/johnchristian.mea" target="_blank">
+                    Facebook
+                </a>
+
+                |
+
+                <!-- INSERT YOUR GITHUB LINK -->
+                <a href="https://github.com/cristianmea27-a11y" target="_blank">
+                    GitHub
+                </a>
+
+            </p>
+
+
+            <h3>Send a Message</h3>
+
+            <form>
+
+                <label>Name:</label>
+
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                >
+
+
+                <label>Email:</label>
+
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                >
+
+
+                <label>Message:</label>
+
+                <textarea
+                    placeholder="Enter your message"
+                ></textarea>
+
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <script type="text/javascript">
+
+            // DARK MODE
+
+            var button = document.getElementById("darkmd");
+
+            button.addEventListener("click", function() {
+
+                document.body.classList.toggle("dark");
+
+            });
+
+
+            // CHATBOT
+
+            var askbutton = document.getElementById("askbutton");
+
+            askbutton.addEventListener("click", function() {
+
+                var question =
+                    document.getElementById("chatbot").value.toLowerCase();
+
+                var answer =
+                    document.getElementById("chatanswer");
+
+
+                if (question.includes("skill")) {
+
+                    answer.innerHTML =
+                        "INSERT YOUR ANSWER ABOUT YOUR SKILLS HERE.";
+
+                }
+
+                else if (question.includes("project")) {
+
+                    answer.innerHTML =
+                        "INSERT YOUR ANSWER ABOUT YOUR PROJECTS HERE.";
+
+                }
+
+                else if (
+                    question.includes("study") ||
+                    question.includes("course")
+                ) {
+
+                    answer.innerHTML =
+                        "INSERT YOUR ANSWER ABOUT YOUR EDUCATION HERE.";
+
+                }
+
+                else {
+
+                    answer.innerHTML =
+                        "Sorry, I don't have an answer for that question.";
+
+                }
+
+            });
+
+        </script>
+
+    </body>
+</html>
