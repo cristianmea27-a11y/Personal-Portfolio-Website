@@ -12,8 +12,9 @@
             scroll-behavior: smooth;
         }
 
-
-        /* MAIN PAGE */
+        /* ==============================
+        MAIN PAGE
+        ============================== */
 
         body {
             margin: 0;
@@ -22,82 +23,156 @@
             font-family: Arial, sans-serif;
 
             color: #17233d;
-            background-color: #eef2f8;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(201, 168, 76, 0.08), transparent 25%),
+                radial-gradient(circle at 90% 30%, rgba(23, 54, 107, 0.08), transparent 30%),
+                #eef2f8;
 
-            transition: 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body.dark {
             color: #e8edf7;
-            background-color: #081326;
+
+            background:
+                radial-gradient(circle at 10% 10%, rgba(201, 168, 76, 0.07), transparent 25%),
+                radial-gradient(circle at 90% 30%, rgba(31, 74, 140, 0.12), transparent 30%),
+                #081326;
         }
 
 
-        /* DARK MODE BUTTON */
+        /* ==============================
+        DARK MODE BUTTON
+        ============================== */
 
         #darkmd {
             position: fixed;
 
             top: 20px;
-            right: 20px;
+            right: 25px;
 
-            padding: 10px 18px;
+            padding: 10px 17px;
 
             font-weight: bold;
+            font-size: 14px;
 
             color: white;
-            background-color: #142a52;
+            background: rgba(13, 29, 56, 0.95);
 
             border: 1px solid #c9a84c;
-            border-radius: 5px;
+            border-radius: 20px;
 
             cursor: pointer;
 
             z-index: 100;
 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+
             transition: 0.3s;
         }
 
         #darkmd:hover {
-            background-color: #1e4078;
+            color: #081326;
+            background-color: #d4b45f;
+
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(201, 168, 76, 0.25);
         }
 
         body.dark #darkmd {
-            color: #f5d77a;
-            background-color: #0d1d38;
+            color: #081326;
+            background-color: #d4b45f;
+        }
 
-            border-color: #c9a84c;
+        body.dark #darkmd:hover {
+            color: white;
+            background-color: #17366b;
         }
 
 
-        /* HOME */
+        /* ==============================
+        HOME / HERO
+        ============================== */
 
         header {
+            position: relative;
+
             text-align: center;
 
-            padding: 75px 20px 60px;
+            padding: 95px 20px 85px;
 
             color: white;
 
-            background-color: #10264d;
+            background:
+                linear-gradient(
+                    135deg,
+                    #081a38 0%,
+                    #102f60 50%,
+                    #081a38 100%
+                );
 
             border-bottom: 4px solid #c9a84c;
 
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+
+            box-shadow: 0 10px 30px rgba(5, 20, 45, 0.25);
+        }
+
+        /* Decorative background glow */
+
+        header::before {
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            top: -180px;
+            left: -100px;
+
+            border: 1px solid rgba(201, 168, 76, 0.18);
+
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            right: -180px;
+            bottom: -300px;
+
+            border: 1px solid rgba(201, 168, 76, 0.15);
+
+            border-radius: 50%;
         }
 
         body.dark header {
-            background-color: #061024;
-
-            border-bottom-color: #c9a84c;
+            background:
+                linear-gradient(
+                    135deg,
+                    #040c1b 0%,
+                    #0a1c3b 50%,
+                    #040c1b 100%
+                );
         }
 
 
-        /* PROFILE PICTURE */
+        /* ==============================
+        PROFILE PICTURE
+        ============================== */
 
         header img {
-            width: 165px;
-            height: 165px;
+            position: relative;
+            z-index: 2;
+
+            width: 175px;
+            height: 175px;
 
             object-fit: cover;
 
@@ -105,90 +180,172 @@
 
             border: 4px solid #d4b45f;
 
-            margin-bottom: 20px;
+            margin-bottom: 22px;
 
             box-shadow:
-                0 0 0 6px rgba(255, 255, 255, 0.08),
-                0 8px 25px rgba(0, 0, 0, 0.35);
+                0 0 0 8px rgba(255, 255, 255, 0.05),
+                0 0 35px rgba(201, 168, 76, 0.18),
+                0 12px 30px rgba(0, 0, 0, 0.4);
+
+            transition: 0.3s;
+        }
+
+        header img:hover {
+            transform: scale(1.04);
+
+            box-shadow:
+                0 0 0 8px rgba(255, 255, 255, 0.07),
+                0 0 45px rgba(201, 168, 76, 0.3),
+                0 15px 35px rgba(0, 0, 0, 0.45);
         }
 
 
-        /* HOME TEXT */
+        /* ==============================
+        HOME TEXT
+        ============================== */
 
         header h1 {
-            margin: 10px 0;
+            position: relative;
+            z-index: 2;
 
-            font-size: 36px;
+            margin: 8px 0;
 
-            letter-spacing: 1px;
+            font-size: 42px;
+
+            letter-spacing: 1.5px;
+
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
         }
 
         header h2 {
-            margin: 5px 0;
+            position: relative;
+            z-index: 2;
+
+            margin: 8px 0;
 
             font-size: 20px;
 
             font-weight: normal;
 
             color: #e0c66d;
+
+            letter-spacing: 1px;
+        }
+
+        header p {
+            position: relative;
+            z-index: 2;
+
+            max-width: 650px;
+
+            margin: 18px auto 0;
+
+            line-height: 1.7;
+
+            color: #d9e2f2;
         }
 
 
-        /* SECTIONS */
+        /* ==============================
+        SECTIONS
+        ============================== */
 
         section {
-            max-width: 900px;
+            max-width: 1000px;
 
-            margin: 30px auto;
+            margin: 40px auto;
 
-            padding: 30px;
+            padding: 35px;
 
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.96);
 
-            border-radius: 8px;
+            border-radius: 14px;
 
             border: 1px solid #d4dce9;
 
             border-top: 4px solid #17366b;
 
             box-shadow:
-                0 4px 15px rgba(15, 35, 70, 0.08);
+                0 8px 30px rgba(15, 35, 70, 0.08);
 
             transition: 0.3s;
         }
 
+        section:hover {
+            box-shadow:
+                0 12px 35px rgba(15, 35, 70, 0.12);
+        }
+
         body.dark section {
-            background-color: #0e1c34;
+            background-color: rgba(14, 28, 52, 0.96);
 
             border-color: #20385f;
 
             border-top-color: #c9a84c;
 
             box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.25);
+                0 8px 30px rgba(0, 0, 0, 0.25);
         }
 
 
-        /* SECTION TITLES */
+        /* ==============================
+        SECTION TITLES
+        ============================== */
 
         section h2 {
-            margin-top: 0;
+            position: relative;
 
-            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 25px;
+
+            padding-bottom: 12px;
 
             color: #17366b;
 
-            border-bottom: 2px solid #c9a84c;
+            border-bottom: 1px solid #d4dce9;
+        }
+
+        section h2::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -1px;
+
+            width: 70px;
+            height: 3px;
+
+            background-color: #c9a84c;
         }
 
         body.dark section h2 {
             color: #e3c96b;
 
-            border-color: #c9a84c;
+            border-color: #294368;
         }
 
 
-        /* SKILLS */
+        /* ==============================
+        GENERAL TEXT
+        ============================== */
+
+        section p {
+            line-height: 1.7;
+        }
+
+        section strong {
+            color: #17366b;
+        }
+
+        body.dark section strong {
+            color: #e0c66d;
+        }
+
+
+        /* ==============================
+        SKILLS
+        ============================== */
 
         .skills {
             display: flex;
@@ -199,7 +356,9 @@
         }
 
         .skill {
-            padding: 10px 16px;
+            position: relative;
+
+            padding: 11px 17px;
 
             color: #17366b;
 
@@ -207,9 +366,12 @@
 
             border: 1px solid #b9c7dc;
 
-            border-radius: 5px;
+            border-radius: 20px;
 
-            transition: 0.2s;
+            font-size: 14px;
+            font-weight: bold;
+
+            transition: 0.25s;
         }
 
         .skill:hover {
@@ -218,6 +380,11 @@
             background-color: #17366b;
 
             border-color: #17366b;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 6px 15px rgba(23, 54, 107, 0.2);
         }
 
         body.dark .skill {
@@ -234,25 +401,32 @@
             background-color: #d4b45f;
 
             border-color: #d4b45f;
+
+            box-shadow:
+                0 6px 15px rgba(201, 168, 76, 0.2);
         }
 
 
-        /* PROJECTS */
+        /* ==============================
+        PROJECTS
+        ============================== */
 
         .projects {
             display: flex;
 
-            gap: 20px;
+            gap: 22px;
 
             flex-wrap: wrap;
         }
 
         .project {
+            position: relative;
+
             flex: 1;
 
-            min-width: 250px;
+            min-width: 280px;
 
-            padding: 20px;
+            padding: 25px;
 
             background-color: #f7f9fc;
 
@@ -260,16 +434,42 @@
 
             border-left: 4px solid #17366b;
 
-            border-radius: 5px;
+            border-radius: 10px;
 
-            transition: 0.2s;
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .project::after {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -50px;
+            bottom: -50px;
+
+            border-radius: 50%;
+
+            background-color: rgba(201, 168, 76, 0.08);
+
+            transition: 0.3s;
         }
 
         .project:hover {
-            transform: translateY(-3px);
+            transform: translateY(-6px);
+
+            border-left-color: #c9a84c;
 
             box-shadow:
-                0 5px 15px rgba(20, 50, 100, 0.12);
+                0 12px 25px rgba(20, 50, 100, 0.14);
+        }
+
+        .project:hover::after {
+            transform: scale(1.8);
         }
 
         body.dark .project {
@@ -282,28 +482,48 @@
 
         body.dark .project:hover {
             box-shadow:
-                0 5px 20px rgba(0, 0, 0, 0.3);
+                0 12px 25px rgba(0, 0, 0, 0.35);
         }
 
         .project h3 {
+            position: relative;
+            z-index: 2;
+
             margin-top: 0;
 
             color: #17366b;
+
+            font-size: 20px;
         }
 
         body.dark .project h3 {
             color: #e0c66d;
         }
 
+        .project p {
+            position: relative;
+            z-index: 2;
 
-        /* CHATBOT */
+            color: #4a5870;
+        }
+
+        body.dark .project p {
+            color: #c5d0e2;
+        }
+
+
+        /* ==============================
+        CHATBOT
+        ============================== */
 
         #chatbot {
-            width: calc(100% - 90px);
+            width: calc(100% - 105px);
 
-            padding: 12px;
+            padding: 13px 15px;
 
             font-family: Arial, sans-serif;
+
+            font-size: 15px;
 
             color: #17233d;
 
@@ -311,16 +531,18 @@
 
             border: 1px solid #aebbd0;
 
-            border-radius: 5px;
+            border-radius: 7px;
 
             outline: none;
+
+            transition: 0.2s;
         }
 
         #chatbot:focus {
             border-color: #17366b;
 
             box-shadow:
-                0 0 0 2px rgba(23, 54, 107, 0.1);
+                0 0 0 3px rgba(23, 54, 107, 0.1);
         }
 
         body.dark #chatbot {
@@ -332,10 +554,12 @@
         }
 
 
-        /* ASK BUTTON */
+        /* ==============================
+        ASK BUTTON
+        ============================== */
 
         #askbutton {
-            padding: 12px 18px;
+            padding: 13px 20px;
 
             font-weight: bold;
 
@@ -345,13 +569,20 @@
 
             border: none;
 
-            border-radius: 5px;
+            border-radius: 7px;
 
             cursor: pointer;
+
+            transition: 0.25s;
         }
 
         #askbutton:hover {
             background-color: #244d8f;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 15px rgba(23, 54, 107, 0.2);
         }
 
         body.dark #askbutton {
@@ -362,17 +593,24 @@
 
         body.dark #askbutton:hover {
             background-color: #e3c96b;
+
+            box-shadow:
+                0 6px 15px rgba(201, 168, 76, 0.2);
         }
 
 
-        /* CHAT ANSWER */
+        /* ==============================
+        CHAT ANSWER
+        ============================== */
 
         #chatanswer {
-            margin-top: 15px;
+            margin-top: 18px;
 
-            padding: 15px;
+            padding: 16px;
 
-            min-height: 45px;
+            min-height: 50px;
+
+            line-height: 1.6;
 
             background-color: #f3f6fb;
 
@@ -380,7 +618,7 @@
 
             border-left: 4px solid #c9a84c;
 
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
         body.dark #chatanswer {
@@ -392,18 +630,22 @@
         }
 
 
-        /* CONTACT FORM */
+        /* ==============================
+        CONTACT FORM
+        ============================== */
 
         input,
         textarea {
             width: 100%;
 
-            padding: 12px;
+            padding: 13px 15px;
 
             margin-top: 5px;
-            margin-bottom: 15px;
+            margin-bottom: 17px;
 
             font-family: Arial, sans-serif;
+
+            font-size: 15px;
 
             color: #17233d;
 
@@ -411,9 +653,11 @@
 
             border: 1px solid #aebbd0;
 
-            border-radius: 5px;
+            border-radius: 7px;
 
             outline: none;
+
+            transition: 0.2s;
         }
 
         input:focus,
@@ -421,7 +665,7 @@
             border-color: #17366b;
 
             box-shadow:
-                0 0 0 2px rgba(23, 54, 107, 0.08);
+                0 0 0 3px rgba(23, 54, 107, 0.08);
         }
 
         body.dark input,
@@ -434,16 +678,18 @@
         }
 
         textarea {
-            height: 120px;
+            height: 130px;
 
             resize: vertical;
         }
 
 
-        /* SEND BUTTON */
+        /* ==============================
+        SEND BUTTON
+        ============================== */
 
         form button {
-            padding: 12px 20px;
+            padding: 13px 23px;
 
             font-weight: bold;
 
@@ -453,13 +699,20 @@
 
             border: none;
 
-            border-radius: 5px;
+            border-radius: 7px;
 
             cursor: pointer;
+
+            transition: 0.25s;
         }
 
         form button:hover {
             background-color: #244d8f;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 15px rgba(23, 54, 107, 0.2);
         }
 
         body.dark form button {
@@ -473,20 +726,46 @@
         }
 
 
-        /* SOCIAL LINKS */
+        /* ==============================
+        SOCIAL LINKS
+        ============================== */
 
         a {
+            position: relative;
+
             color: #17366b;
 
             font-weight: bold;
 
             text-decoration: none;
+
+            transition: 0.2s;
         }
 
         a:hover {
             color: #b08b25;
 
-            text-decoration: underline;
+            text-decoration: none;
+        }
+
+        a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -3px;
+
+            width: 0;
+            height: 2px;
+
+            background-color: #c9a84c;
+
+            transition: 0.2s;
+        }
+
+        a:hover::after {
+            width: 100%;
         }
 
         body.dark a {
@@ -498,7 +777,9 @@
         }
 
 
-        /* MOBILE */
+        /* ==============================
+        MOBILE
+        ============================== */
 
         @media screen and (max-width: 600px) {
 
@@ -507,33 +788,41 @@
             }
 
             #darkmd {
-                top: 10px;
-                right: 10px;
+                top: 12px;
+                right: 12px;
 
-                padding: 8px 12px;
+                padding: 8px 13px;
+
+                font-size: 13px;
             }
 
             header {
-                padding: 65px 15px 40px;
+                padding: 75px 18px 55px;
             }
 
             header img {
-                width: 135px;
-                height: 135px;
+                width: 140px;
+                height: 140px;
             }
 
             header h1 {
-                font-size: 27px;
+                font-size: 29px;
             }
 
             header h2 {
                 font-size: 17px;
             }
 
-            section {
-                margin: 20px 10px;
+            header p {
+                font-size: 14px;
+            }
 
-                padding: 20px;
+            section {
+                margin: 25px 10px;
+
+                padding: 25px 20px;
+
+                border-radius: 11px;
             }
 
             section h2 {
@@ -558,10 +847,19 @@
                 width: 100%;
             }
 
+            .skills {
+                gap: 9px;
+            }
+
+            .skill {
+                padding: 9px 13px;
+
+                font-size: 13px;
+            }
         }
 
     </style>
-
+    
     </head>
 
 
