@@ -1,1046 +1,2124 @@
-<html>
-    <head>
-        <title>Personal Portfolio Website</title>
+<!DOCTYPE html>
 
-    <style type="text/css">
+<html lang="en">
 
-        * {
-            box-sizing: border-box;
-        }
+<head>
 
-        html {
-            scroll-behavior: smooth;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* ==============================
-        MAIN PAGE
-        ============================== */
+<title>John Christian D Mea | Portfolio</title>
 
-        body {
-            margin: 0;
-            padding: 0;
+<style>
 
-            font-family: Arial, sans-serif;
+    * {
+        box-sizing: border-box;
+    }
 
-            color: #17233d;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(201, 168, 76, 0.08), transparent 25%),
-                radial-gradient(circle at 90% 30%, rgba(23, 54, 107, 0.08), transparent 30%),
-                #eef2f8;
+    html {
+        scroll-behavior: smooth;
+    }
 
-            transition: background-color 0.3s, color 0.3s;
-        }
+    body {
+        margin: 0;
+        padding: 0;
 
-        body.dark {
-            color: #e8edf7;
+        font-family: Arial, sans-serif;
 
-            background:
-                radial-gradient(circle at 10% 10%, rgba(201, 168, 76, 0.07), transparent 25%),
-                radial-gradient(circle at 90% 30%, rgba(31, 74, 140, 0.12), transparent 30%),
-                #081326;
-        }
+        color: #17233d;
+
+        background:
+            radial-gradient(circle at 10% 10%, rgba(201,168,76,0.08), transparent 25%),
+            radial-gradient(circle at 90% 30%, rgba(23,54,107,0.08), transparent 30%),
+            #eef2f8;
+
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark {
+        color: #e8edf7;
+
+        background:
+            radial-gradient(circle at 10% 10%, rgba(201,168,76,0.07), transparent 25%),
+            radial-gradient(circle at 90% 30%, rgba(31,74,140,0.12), transparent 30%),
+            #081326;
+    }
 
 
-        /* ==============================
-        DARK MODE BUTTON
-        ============================== */
+    /* ==============================
+       DARK MODE BUTTON
+    ============================== */
+
+    #darkmd {
+        position: fixed;
+
+        top: 20px;
+        right: 25px;
+
+        padding: 10px 17px;
+
+        font-weight: bold;
+        font-size: 14px;
+
+        color: white;
+        background: rgba(13,29,56,0.95);
+
+        border: 1px solid #d4b45f;
+        border-radius: 20px;
+
+        cursor: pointer;
+
+        z-index: 100;
+
+        box-shadow: 0 5px 15px rgba(0,0,0,0.18);
+
+        transition: 0.3s;
+    }
+
+    #darkmd:hover {
+        color: #081326;
+        background-color: #d4b45f;
+
+        transform: translateY(-2px);
+    }
+
+    body.dark #darkmd {
+        color: #081326;
+        background-color: #d4b45f;
+    }
+
+    body.dark #darkmd:hover {
+        color: white;
+        background-color: #17366b;
+    }
+
+
+    /* ==============================
+       HOME
+    ============================== */
+
+    header {
+        position: relative;
+
+        height: 100vh;
+        min-height: 600px;
+
+        padding: 35px 20px 30px;
+
+        overflow: hidden;
+
+        color: white;
+        text-align: center;
+
+        background:
+            radial-gradient(circle at center, rgba(201,168,76,0.12), transparent 35%),
+            linear-gradient(135deg, #081a38, #102f60, #081a38);
+
+        border-bottom: 4px solid #d4b45f;
+
+        transition: background 0.4s;
+    }
+
+    header::before {
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+        height: 350px;
+
+        top: -180px;
+        left: -100px;
+
+        border: 1px solid rgba(212,180,95,0.18);
+
+        border-radius: 50%;
+    }
+
+    header::after {
+        content: "";
+
+        position: absolute;
+
+        width: 450px;
+        height: 450px;
+
+        right: -180px;
+        bottom: -300px;
+
+        border: 1px solid rgba(212,180,95,0.15);
+
+        border-radius: 50%;
+    }
+
+    .hero-intro {
+        position: relative;
+
+        z-index: 3;
+
+        text-align: center;
+
+        max-width: 650px;
+
+        margin: 0 auto 10px;
+    }
+
+    .hero-label {
+        margin: 0 0 8px;
+
+        color: #d4b45f;
+
+        font-size: 12px;
+        font-weight: bold;
+
+        letter-spacing: 3px;
+    }
+
+    .hero-intro h1 {
+        margin: 0;
+
+        font-size: 38px;
+        letter-spacing: 1px;
+
+        color: #f4f6fa;
+    }
+
+    .hero-intro h2 {
+        margin: 6px 0;
+
+        font-size: 18px;
+        font-weight: normal;
+
+        color: #d9e2f2;
+    }
+
+    .hero-intro p {
+        max-width: 560px;
+
+        margin: 10px auto 0;
+
+        line-height: 1.4;
+
+        font-size: 14px;
+
+        color: #c9d5e8;
+    }
+
+
+    /* ==============================
+       PERSONAL MAP
+    ============================== */
+
+    .personal-map {
+        position: relative;
+
+        width: 760px;
+        height: 340px;
+
+        max-width: 100%;
+
+        margin: auto;
+    }
+
+    .profile-center {
+        position: absolute;
+
+        width: 190px;
+        height: 190px;
+
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        z-index: 5;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-center::before {
+        content: "";
+
+        position: absolute;
+
+        inset: -17px;
+
+        border: 1px solid rgba(212,180,95,0.45);
+
+        border-radius: 50%;
+    }
+
+    .profile-center::after {
+        content: "";
+
+        position: absolute;
+
+        inset: -32px;
+
+        border: 1px dashed rgba(212,180,95,0.18);
+
+        border-radius: 50%;
+    }
+
+    .profile-center img {
+        width: 165px;
+        height: 165px;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+        border: 4px solid #d4b45f;
+
+        box-shadow:
+            0 0 0 7px rgba(255,255,255,0.04),
+            0 12px 30px rgba(0,0,0,0.45);
+
+        transition: 0.4s;
+    }
+
+    .branch {
+        position: absolute;
+
+        width: 300px;
+        height: 2px;
+
+        background: #d4b45f;
+
+        transform-origin: left center;
+
+        opacity: 0.75;
+
+        z-index: 1;
+    }
+
+    .branch-about {
+        left: 380px;
+        top: 170px;
+
+        transform: rotate(204deg);
+    }
+
+    .branch-skills {
+        left: 380px;
+        top: 170px;
+
+        transform: rotate(156deg);
+    }
+
+    .branch-projects {
+        left: 380px;
+        top: 170px;
+
+        transform: rotate(-24deg);
+    }
+
+    .branch-contact {
+        left: 380px;
+        top: 170px;
+
+        transform: rotate(24deg);
+    }
+
+    .map-node {
+        position: absolute;
+
+        z-index: 6;
+
+        width: 145px;
+
+        padding: 13px 15px;
+
+        color: #e8edf7;
+
+        background: rgba(8,26,56,0.94);
+
+        border: 1px solid #d4b45f;
+        border-radius: 8px;
+
+        text-align: center;
+        text-decoration: none;
+
+        transition: 0.3s;
+    }
+
+    .map-node:hover {
+        color: #081326;
+
+        background: #d4b45f;
+
+        transform: translateY(-3px);
+    }
+
+    .node-about {
+        left: 4%;
+        top: 2%;
+    }
+
+    .node-skills {
+        left: 4%;
+        bottom: 2%;
+    }
+
+    .node-projects {
+        right: 4%;
+        top: 2%;
+    }
+
+    .node-contact {
+        right: 4%;
+        bottom: 2%;
+    }
+
+    .hero-note {
+        position: absolute;
+
+        bottom: 18px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 3;
+
+        color: #b9c7dc;
+
+        font-size: 12px;
+
+        letter-spacing: 1px;
+    }
+
+    body.dark header {
+        background:
+            radial-gradient(circle at center, rgba(212,180,95,0.18), transparent 38%),
+            linear-gradient(135deg, #050d1c, #0b2348, #050d1c);
+
+        border-bottom-color: #d4b45f;
+    }
+
+    body.dark .map-node {
+        color: #edf2fa;
+
+        background: rgba(5,15,32,0.94);
+
+        border-color: #d4b45f;
+    }
+
+    body.dark .hero-intro h1 {
+        color: #ffffff;
+    }
+
+    body.dark .profile-center img {
+        box-shadow:
+            0 0 0 7px rgba(212,180,95,0.06),
+            0 0 35px rgba(212,180,95,0.12),
+            0 12px 30px rgba(0,0,0,0.55);
+    }
+
+
+    /* ==============================
+       SECTIONS
+    ============================== */
+
+    section {
+        max-width: 1000px;
+
+        min-height: calc(100vh - 40px);
+
+        margin: 20px auto;
+
+        padding: 55px 45px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        background: rgba(255,255,255,0.96);
+
+        border: 1px solid #d4dce9;
+
+        border-radius: 14px;
+
+        border-top: 4px solid #17366b;
+
+        box-shadow: 0 8px 30px rgba(15,35,70,0.08);
+
+        transition: 0.3s;
+    }
+
+    section:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 12px 35px rgba(15,35,70,0.12);
+    }
+
+    body.dark section {
+        background: rgba(14,28,52,0.96);
+
+        border-color: #20385f;
+
+        border-top-color: #c9a84c;
+
+        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    section h2 {
+        position: relative;
+
+        margin-top: 0;
+        margin-bottom: 25px;
+
+        padding-bottom: 12px;
+
+        color: #17366b;
+
+        border-bottom: 1px solid #d4dce9;
+    }
+
+    section h2::after {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        bottom: -1px;
+
+        width: 70px;
+        height: 3px;
+
+        background-color: #c9a84c;
+    }
+
+    body.dark section h2 {
+        color: #e3c96b;
+
+        border-color: #294368;
+    }
+
+    section p {
+        line-height: 1.7;
+    }
+
+    section strong {
+        color: #17366b;
+    }
+
+    body.dark section strong {
+        color: #e0c66d;
+    }
+
+
+    /* ==============================
+       ABOUT ME
+    ============================== */
+
+    .about-intro {
+        max-width: 760px;
+
+        margin: 0 auto 25px;
+
+        text-align: center;
+    }
+
+    .about-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 18px;
+    }
+
+    .about-box {
+        padding: 23px;
+
+        border-radius: 12px;
+
+        border: 1px solid;
+
+        border-left-width: 5px;
+
+        min-height: 170px;
+    }
+
+    .about-box h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .about-box p {
+        margin-bottom: 0;
+
+        color: #4d5a70;
+    }
+
+    .about-education {
+        background: #edf4ff;
+
+        border-color: #b8cbe8;
+
+        border-left-color: #4d78b8;
+    }
+
+    .about-focus {
+        background: #fff8e7;
+
+        border-color: #e7d39b;
+
+        border-left-color: #c9a84c;
+    }
+
+    .about-growth {
+        background: #edf8f4;
+
+        border-color: #b7d8ce;
+
+        border-left-color: #4d9a83;
+    }
+
+    body.dark .about-box p {
+        color: #c7d2e3;
+    }
+
+    body.dark .about-education {
+        background: #142c4e;
+
+        border-color: #2d4f7c;
+
+        border-left-color: #6f9edc;
+    }
+
+    body.dark .about-focus {
+        background: #3b321b;
+
+        border-color: #65552b;
+
+        border-left-color: #d4b45f;
+    }
+
+    body.dark .about-growth {
+        background: #14372f;
+
+        border-color: #2c5d50;
+
+        border-left-color: #65b39b;
+    }
+
+
+    /* ==============================
+       SKILLS
+    ============================== */
+
+    .skills-intro {
+        max-width: 720px;
+
+        margin: -5px auto 25px;
+
+        text-align: center;
+
+        color: #59667a;
+    }
+
+    body.dark .skills-intro {
+        color: #bcc8da;
+    }
+
+    .skill-groups {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 18px;
+    }
+
+    .skill-group {
+        padding: 22px;
+
+        border-radius: 12px;
+
+        border: 1px solid;
+
+        border-top: 4px solid;
+
+        min-height: 150px;
+
+        transition: 0.25s;
+    }
+
+    .skill-group:hover {
+        transform: translateY(-3px);
+    }
+
+    .skill-group h3 {
+        margin: 0 0 15px;
+    }
+
+    .skill-list {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 9px;
+    }
+
+    .skill {
+        padding: 9px 13px;
+
+        border-radius: 18px;
+
+        font-size: 13px;
+
+        font-weight: bold;
+
+        border: 1px solid;
+    }
+
+    .skill-web {
+        background: #edf4ff;
+
+        border-color: #b8cbe8;
+
+        border-top-color: #4d78b8;
+    }
+
+    .skill-web .skill {
+        color: #28548e;
+
+        background: #f8fbff;
+
+        border-color: #b8cbe8;
+    }
+
+    .skill-programming {
+        background: #f3effc;
+
+        border-color: #cfc3e8;
+
+        border-top-color: #8064b5;
+    }
+
+    .skill-programming .skill {
+        color: #634894;
+
+        background: #fbf9ff;
+
+        border-color: #cfc3e8;
+    }
+
+    .skill-database {
+        background: #edf8f7;
+
+        border-color: #b9d9d5;
+
+        border-top-color: #4b938c;
+    }
+
+    .skill-database .skill {
+        color: #36766f;
+
+        background: #f8fffe;
+
+        border-color: #b9d9d5;
+    }
+
+    .skill-tools {
+        background: #fff8e8;
+
+        border-color: #e5d39c;
+
+        border-top-color: #c9a84c;
+    }
+
+    .skill-tools .skill {
+        color: #8a6a16;
+
+        background: #fffdf7;
+
+        border-color: #e5d39c;
+    }
+
+    .skill-learning {
+        background: #edf8f1;
+
+        border-color: #b8d8c1;
+
+        border-top-color: #55966b;
+    }
+
+    .skill-learning .skill {
+        color: #39734d;
+
+        background: #f9fffa;
+
+        border-color: #b8d8c1;
+    }
+
+    body.dark .skill-group {
+        background-color: #132542;
+    }
+
+    body.dark .skill-web {
+        background: #142c4e;
+
+        border-color: #2d4f7c;
+
+        border-top-color: #6f9edc;
+    }
+
+    body.dark .skill-web .skill {
+        color: #b9d5fa;
+
+        background: #10233f;
+
+        border-color: #35557f;
+    }
+
+    body.dark .skill-programming {
+        background: #29223c;
+
+        border-color: #51436f;
+
+        border-top-color: #a98bd9;
+    }
+
+    body.dark .skill-programming .skill {
+        color: #d2bff2;
+
+        background: #211b31;
+
+        border-color: #594a79;
+    }
+
+    body.dark .skill-database {
+        background: #143733;
+
+        border-color: #2c5d57;
+
+        border-top-color: #68b3aa;
+    }
+
+    body.dark .skill-database .skill {
+        color: #a8ddd6;
+
+        background: #102d29;
+
+        border-color: #356c65;
+    }
+
+    body.dark .skill-tools {
+        background: #3b321b;
+
+        border-color: #65552b;
+
+        border-top-color: #d4b45f;
+    }
+
+    body.dark .skill-tools .skill {
+        color: #ecd783;
+
+        background: #302815;
+
+        border-color: #75632e;
+    }
+
+    body.dark .skill-learning {
+        background: #17372a;
+
+        border-color: #32614a;
+
+        border-top-color: #72bd88;
+    }
+
+    body.dark .skill-learning .skill {
+        color: #b6e3c1;
+
+        background: #122c22;
+
+        border-color: #3c7654;
+    }
+
+
+    /* ==============================
+       PROJECTS
+    ============================== */
+
+    .projects {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 25px;
+    }
+
+    .project {
+        overflow: hidden;
+
+        background-color: #f7f9fc;
+
+        border: 1px solid #d0d9e8;
+
+        border-top: 4px solid #17366b;
+
+        border-radius: 12px;
+
+        transition: 0.3s;
+    }
+
+    .project:hover {
+        transform: translateY(-5px);
+
+        border-top-color: #c9a84c;
+
+        box-shadow: 0 12px 25px rgba(20,50,100,0.14);
+    }
+
+    .project-image {
+        width: 100%;
+
+        background-color: #dfe5ee;
+
+        overflow: hidden;
+    }
+
+    .project-image img {
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+    }
+
+    .project-content {
+        padding: 22px;
+    }
+
+    .project-number {
+        margin-bottom: 8px;
+
+        color: #c9a84c;
+
+        font-size: 11px;
+
+        font-weight: bold;
+
+        letter-spacing: 2px;
+    }
+
+    .project h3 {
+        margin: 0 0 10px;
+
+        color: #17366b;
+
+        font-size: 20px;
+    }
+
+    .project p {
+        margin-bottom: 17px;
+
+        color: #4a5870;
+
+        line-height: 1.6;
+    }
+
+    .project-tags {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 7px;
+    }
+
+    .project-tags span {
+        padding: 6px 10px;
+
+        color: #28548e;
+
+        background-color: #edf4ff;
+
+        border: 1px solid #b8cbe8;
+
+        border-radius: 15px;
+
+        font-size: 11px;
+
+        font-weight: bold;
+    }
+
+    body.dark .project {
+        background-color: #132542;
+
+        border-color: #294368;
+
+        border-top-color: #c9a84c;
+    }
+
+    body.dark .project-image {
+        background-color: #09172c;
+    }
+
+    body.dark .project h3 {
+        color: #e0c66d;
+    }
+
+    body.dark .project p {
+        color: #c5d0e2;
+    }
+
+    body.dark .project-tags span {
+        color: #b9d5fa;
+
+        background-color: #10233f;
+
+        border-color: #35557f;
+    }
+
+
+    /* ==============================
+       CHATBOT
+    ============================== */
+
+    .chatbot-container {
+        position: fixed;
+
+        right: 25px;
+        bottom: 25px;
+
+        z-index: 99;
+    }
+
+    #chatbot-button {
+        width: 58px;
+        height: 58px;
+
+        border: 1px solid #d4b45f;
+
+        border-radius: 50%;
+
+        color: white;
+
+        background-color: #17366b;
+
+        font-size: 24px;
+
+        cursor: pointer;
+
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+
+        transition: 0.3s;
+    }
+
+    #chatbot-button:hover {
+        transform: translateY(-3px);
+
+        background-color: #244d8f;
+    }
+
+    .chatbot-box {
+        position: absolute;
+
+        right: 0;
+        bottom: 70px;
+
+        width: 320px;
+
+        padding: 0;
+
+        overflow: hidden;
+
+        background-color: white;
+
+        border: 1px solid #cbd5e3;
+
+        border-radius: 13px;
+
+        box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+
+        display: none;
+    }
+
+    .chatbot-box.show {
+        display: block;
+    }
+
+    .chatbot-header {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 15px 17px;
+
+        color: white;
+
+        background-color: #17366b;
+    }
+
+    .chatbot-header strong {
+        display: block;
+    }
+
+    .chatbot-header small {
+        display: block;
+
+        margin-top: 3px;
+
+        color: #cbd8eb;
+
+        font-size: 11px;
+    }
+
+    #chatbot-close {
+        border: none;
+
+        color: white;
+
+        background: none;
+
+        font-size: 22px;
+
+        cursor: pointer;
+    }
+
+    .chatbot-answer {
+        margin: 15px;
+
+        padding: 12px;
+
+        color: #34445c;
+
+        background-color: #f1f5fa;
+
+        border-left: 3px solid #c9a84c;
+
+        border-radius: 7px;
+
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+
+    .chatbot-questions {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        padding: 0 15px 15px;
+    }
+
+    .chat-question {
+        padding: 10px 12px;
+
+        color: #17366b;
+
+        background-color: #f7f9fc;
+
+        border: 1px solid #cbd5e3;
+
+        border-radius: 7px;
+
+        text-align: left;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+    }
+
+    .chat-question:hover {
+        color: white;
+
+        background-color: #17366b;
+    }
+
+    body.dark .chatbot-box {
+        background-color: #0e1c34;
+
+        border-color: #294368;
+    }
+
+    body.dark .chatbot-header {
+        background-color: #102b54;
+    }
+
+    body.dark .chatbot-answer {
+        color: #d0daea;
+
+        background-color: #132542;
+
+        border-color: #c9a84c;
+    }
+
+    body.dark .chat-question {
+        color: #c9d8ed;
+
+        background-color: #132542;
+
+        border-color: #304b76;
+    }
+
+    body.dark .chat-question:hover {
+        color: #081326;
+
+        background-color: #d4b45f;
+    }
+
+    body.dark #chatbot-button {
+        color: #081326;
+
+        background-color: #d4b45f;
+    }
+
+
+    /* ==============================
+       CONTACT
+    ============================== */
+
+    .contact-info {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 25px;
+
+        align-items: start;
+    }
+
+    .contact-card {
+        padding: 24px;
+
+        background: #f3f6fb;
+
+        border: 1px solid #d0d9e8;
+
+        border-left: 4px solid #c9a84c;
+
+        border-radius: 10px;
+    }
+
+    body.dark .contact-card {
+        background: #132542;
+
+        border-color: #294368;
+
+        border-left-color: #d4b45f;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+
+        padding: 13px 15px;
+
+        margin-top: 5px;
+        margin-bottom: 17px;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 15px;
+
+        color: #17233d;
+
+        background-color: white;
+
+        border: 1px solid #aebbd0;
+
+        border-radius: 7px;
+
+        outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+        border-color: #17366b;
+
+        box-shadow: 0 0 0 3px rgba(23,54,107,0.08);
+    }
+
+    input:invalid:not(:placeholder-shown),
+    textarea:invalid:not(:placeholder-shown) {
+        border-color: #b54a4a;
+    }
+
+    input:valid:not(:placeholder-shown),
+    textarea:valid:not(:placeholder-shown) {
+        border-color: #5b9b76;
+    }
+
+    body.dark input,
+    body.dark textarea {
+        color: white;
+
+        background-color: #09172c;
+
+        border-color: #304b76;
+    }
+
+    textarea {
+        height: 130px;
+
+        resize: vertical;
+    }
+
+    form button {
+        padding: 13px 23px;
+
+        font-weight: bold;
+
+        color: white;
+
+        background-color: #17366b;
+
+        border: none;
+
+        border-radius: 7px;
+
+        cursor: pointer;
+
+        transition: 0.25s;
+    }
+
+    form button:hover {
+        background-color: #244d8f;
+
+        transform: translateY(-2px);
+    }
+
+    body.dark form button {
+        color: #081326;
+
+        background-color: #d4b45f;
+    }
+
+
+    /* ==============================
+       SOCIAL LINKS
+    ============================== */
+
+    .social-links {
+        display: flex;
+
+        gap: 10px;
+
+        margin-top: 20px;
+    }
+
+    .social-links a {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 43px;
+        height: 43px;
+
+        color: white;
+
+        background-color: #17366b;
+
+        border: 1px solid #c9a84c;
+
+        border-radius: 50%;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        text-decoration: none;
+
+        transition: 0.25s;
+    }
+
+    .social-links a:hover {
+        color: #081326;
+
+        background-color: #d4b45f;
+
+        transform: translateY(-3px);
+    }
+
+    body.dark .social-links a {
+        color: #081326;
+
+        background-color: #d4b45f;
+    }
+
+    body.dark .social-links a:hover {
+        color: white;
+
+        background-color: #17366b;
+    }
+
+
+    /* ==============================
+       LINKS
+    ============================== */
+
+    a {
+        color: #17366b;
+
+        font-weight: bold;
+
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #b08b25;
+    }
+
+    body.dark a {
+        color: #d9bd5d;
+    }
+
+
+    /* ==============================
+       MOBILE
+    ============================== */
+
+    @media screen and (max-width: 700px) {
 
         #darkmd {
-            position: fixed;
-
-            top: 20px;
-            right: 25px;
-
-            padding: 10px 17px;
-
-            font-weight: bold;
-            font-size: 14px;
-
-            color: white;
-            background: rgba(13, 29, 56, 0.95);
-
-            border: 1px solid #c9a84c;
-            border-radius: 20px;
-
-            cursor: pointer;
-
-            z-index: 100;
-
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
-
-            transition: 0.3s;
+            top: 12px;
+            right: 12px;
         }
-
-        #darkmd:hover {
-            color: #081326;
-            background-color: #d4b45f;
-
-            transform: translateY(-2px);
-            box-shadow: 0 7px 18px rgba(201, 168, 76, 0.25);
-        }
-
-        body.dark #darkmd {
-            color: #081326;
-            background-color: #d4b45f;
-        }
-
-        body.dark #darkmd:hover {
-            color: white;
-            background-color: #17366b;
-        }
-
-
-        /* ==============================
-        HOME / HERO
-        ============================== */
 
         header {
+            height: auto;
+
+            min-height: 100vh;
+
+            padding: 70px 15px 45px;
+        }
+
+        .hero-intro h1 {
+            font-size: 34px;
+        }
+
+        .hero-intro h2 {
+            font-size: 17px;
+        }
+
+        .personal-map {
+            width: 100%;
+
+            height: auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding-top: 10px;
+        }
+
+        .profile-center {
             position: relative;
+
+            left: auto;
+            top: auto;
+
+            transform: none;
+
+            width: 180px;
+            height: 180px;
+
+            margin: 25px 0;
+        }
+
+        .profile-center img {
+            width: 155px;
+            height: 155px;
+        }
+
+        .profile-center::before,
+        .profile-center::after,
+        .branch {
+            display: none;
+        }
+
+        .map-node {
+            position: relative;
+
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+
+            width: 190px;
+        }
+
+        .hero-note {
+            position: relative;
+
+            bottom: auto;
+
+            left: auto;
+
+            transform: none;
+
+            display: block;
 
             text-align: center;
 
-            padding: 95px 20px 85px;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #081a38 0%,
-                    #102f60 50%,
-                    #081a38 100%
-                );
-
-            border-bottom: 4px solid #c9a84c;
-
-            overflow: hidden;
-
-            box-shadow: 0 10px 30px rgba(5, 20, 45, 0.25);
+            margin-top: 25px;
         }
-
-        /* Decorative background glow */
-
-        header::before {
-            content: "";
-
-            position: absolute;
-
-            width: 350px;
-            height: 350px;
-
-            top: -180px;
-            left: -100px;
-
-            border: 1px solid rgba(201, 168, 76, 0.18);
-
-            border-radius: 50%;
-        }
-
-        header::after {
-            content: "";
-
-            position: absolute;
-
-            width: 450px;
-            height: 450px;
-
-            right: -180px;
-            bottom: -300px;
-
-            border: 1px solid rgba(201, 168, 76, 0.15);
-
-            border-radius: 50%;
-        }
-
-        body.dark header {
-            background:
-                linear-gradient(
-                    135deg,
-                    #040c1b 0%,
-                    #0a1c3b 50%,
-                    #040c1b 100%
-                );
-        }
-
-
-        /* ==============================
-        PROFILE PICTURE
-        ============================== */
-
-        header img {
-            position: relative;
-            z-index: 2;
-
-            width: 175px;
-            height: 175px;
-
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            border: 4px solid #d4b45f;
-
-            margin-bottom: 22px;
-
-            box-shadow:
-                0 0 0 8px rgba(255, 255, 255, 0.05),
-                0 0 35px rgba(201, 168, 76, 0.18),
-                0 12px 30px rgba(0, 0, 0, 0.4);
-
-            transition: 0.3s;
-        }
-
-        header img:hover {
-            transform: scale(1.04);
-
-            box-shadow:
-                0 0 0 8px rgba(255, 255, 255, 0.07),
-                0 0 45px rgba(201, 168, 76, 0.3),
-                0 15px 35px rgba(0, 0, 0, 0.45);
-        }
-
-
-        /* ==============================
-        HOME TEXT
-        ============================== */
-
-        header h1 {
-            position: relative;
-            z-index: 2;
-
-            margin: 8px 0;
-
-            font-size: 42px;
-
-            letter-spacing: 1.5px;
-
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        header h2 {
-            position: relative;
-            z-index: 2;
-
-            margin: 8px 0;
-
-            font-size: 20px;
-
-            font-weight: normal;
-
-            color: #e0c66d;
-
-            letter-spacing: 1px;
-        }
-
-        header p {
-            position: relative;
-            z-index: 2;
-
-            max-width: 650px;
-
-            margin: 18px auto 0;
-
-            line-height: 1.7;
-
-            color: #d9e2f2;
-        }
-
-
-        /* ==============================
-        SECTIONS
-        ============================== */
 
         section {
-            max-width: 1000px;
+            min-height: auto;
 
-            margin: 40px auto;
+            margin: 25px 10px;
 
-            padding: 35px;
+            padding: 35px 20px;
 
-            background-color: rgba(255, 255, 255, 0.96);
-
-            border-radius: 14px;
-
-            border: 1px solid #d4dce9;
-
-            border-top: 4px solid #17366b;
-
-            box-shadow:
-                0 8px 30px rgba(15, 35, 70, 0.08);
-
-            transition: 0.3s;
+            display: block;
         }
 
-        section:hover {
-            box-shadow:
-                0 12px 35px rgba(15, 35, 70, 0.12);
+        .about-grid,
+        .skill-groups,
+        .contact-info {
+            grid-template-columns: 1fr;
         }
-
-        body.dark section {
-            background-color: rgba(14, 28, 52, 0.96);
-
-            border-color: #20385f;
-
-            border-top-color: #c9a84c;
-
-            box-shadow:
-                0 8px 30px rgba(0, 0, 0, 0.25);
-        }
-
-
-        /* ==============================
-        SECTION TITLES
-        ============================== */
-
-        section h2 {
-            position: relative;
-
-            margin-top: 0;
-            margin-bottom: 25px;
-
-            padding-bottom: 12px;
-
-            color: #17366b;
-
-            border-bottom: 1px solid #d4dce9;
-        }
-
-        section h2::after {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            bottom: -1px;
-
-            width: 70px;
-            height: 3px;
-
-            background-color: #c9a84c;
-        }
-
-        body.dark section h2 {
-            color: #e3c96b;
-
-            border-color: #294368;
-        }
-
-
-        /* ==============================
-        GENERAL TEXT
-        ============================== */
-
-        section p {
-            line-height: 1.7;
-        }
-
-        section strong {
-            color: #17366b;
-        }
-
-        body.dark section strong {
-            color: #e0c66d;
-        }
-
-
-        /* ==============================
-        SKILLS
-        ============================== */
-
-        .skills {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 12px;
-        }
-
-        .skill {
-            position: relative;
-
-            padding: 11px 17px;
-
-            color: #17366b;
-
-            background-color: #edf2fa;
-
-            border: 1px solid #b9c7dc;
-
-            border-radius: 20px;
-
-            font-size: 14px;
-            font-weight: bold;
-
-            transition: 0.25s;
-        }
-
-        .skill:hover {
-            color: white;
-
-            background-color: #17366b;
-
-            border-color: #17366b;
-
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 6px 15px rgba(23, 54, 107, 0.2);
-        }
-
-        body.dark .skill {
-            color: #dbe5f5;
-
-            background-color: #142747;
-
-            border-color: #304b76;
-        }
-
-        body.dark .skill:hover {
-            color: #071224;
-
-            background-color: #d4b45f;
-
-            border-color: #d4b45f;
-
-            box-shadow:
-                0 6px 15px rgba(201, 168, 76, 0.2);
-        }
-
-
-        /* ==============================
-        PROJECTS
-        ============================== */
 
         .projects {
-            display: flex;
-
-            gap: 22px;
-
-            flex-wrap: wrap;
+            grid-template-columns: 1fr;
         }
 
-        .project {
-            position: relative;
-
-            flex: 1;
-
-            min-width: 280px;
-
-            padding: 25px;
-
-            background-color: #f7f9fc;
-
-            border: 1px solid #d0d9e8;
-
-            border-left: 4px solid #17366b;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            transition: 0.3s;
+        .chatbot-container {
+            right: 15px;
+            bottom: 15px;
         }
 
-        .project::after {
-            content: "";
+        .chatbot-box {
+            right: 0;
 
-            position: absolute;
+            width: calc(100vw - 30px);
 
-            width: 100px;
-            height: 100px;
-
-            right: -50px;
-            bottom: -50px;
-
-            border-radius: 50%;
-
-            background-color: rgba(201, 168, 76, 0.08);
-
-            transition: 0.3s;
+            max-width: 320px;
         }
+    }
 
-        .project:hover {
-            transform: translateY(-6px);
+</style>
 
-            border-left-color: #c9a84c;
+</head>
 
-            box-shadow:
-                0 12px 25px rgba(20, 50, 100, 0.14);
-        }
+<body>
 
-        .project:hover::after {
-            transform: scale(1.8);
-        }
+<button id="darkmd">Dark Mode</button>
 
-        body.dark .project {
-            background-color: #132542;
 
-            border-color: #294368;
+<!-- ==============================
+     HOME
+============================== -->
 
-            border-left-color: #c9a84c;
-        }
+<header id="home">
 
-        body.dark .project:hover {
-            box-shadow:
-                0 12px 25px rgba(0, 0, 0, 0.35);
-        }
+    <div class="hero-intro">
 
-        .project h3 {
-            position: relative;
-            z-index: 2;
+        <div class="hero-label">
+            PERSONAL PORTFOLIO
+        </div>
 
-            margin-top: 0;
+        <h1>
+            John Christian D Mea
+        </h1>
 
-            color: #17366b;
+        <h2>
+            BS Computer Science Student
+        </h2>
 
-            font-size: 20px;
-        }
+        <p>
+            Currently learning programming concepts such as web development,
+            databases, and other areas of Computer Science.
+        </p>
 
-        body.dark .project h3 {
-            color: #e0c66d;
-        }
+    </div>
 
-        .project p {
-            position: relative;
-            z-index: 2;
 
-            color: #4a5870;
-        }
+    <div class="personal-map">
 
-        body.dark .project p {
-            color: #c5d0e2;
-        }
+        <div class="branch branch-about"></div>
 
+        <div class="branch branch-skills"></div>
 
-        /* ==============================
-        CHATBOT
-        ============================== */
+        <div class="branch branch-projects"></div>
 
-        #chatbot {
-            width: calc(100% - 105px);
+        <div class="branch branch-contact"></div>
 
-            padding: 13px 15px;
 
-            font-family: Arial, sans-serif;
+        <a href="#about" class="map-node node-about">
+            About Me
+        </a>
 
-            font-size: 15px;
+        <a href="#skills" class="map-node node-skills">
+            Skills
+        </a>
 
-            color: #17233d;
 
-            background-color: white;
+        <div class="profile-center">
 
-            border: 1px solid #aebbd0;
-
-            border-radius: 7px;
-
-            outline: none;
-
-            transition: 0.2s;
-        }
-
-        #chatbot:focus {
-            border-color: #17366b;
-
-            box-shadow:
-                0 0 0 3px rgba(23, 54, 107, 0.1);
-        }
-
-        body.dark #chatbot {
-            color: white;
-
-            background-color: #09172c;
-
-            border-color: #304b76;
-        }
-
-
-        /* ==============================
-        ASK BUTTON
-        ============================== */
-
-        #askbutton {
-            padding: 13px 20px;
-
-            font-weight: bold;
-
-            color: white;
-
-            background-color: #17366b;
-
-            border: none;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            transition: 0.25s;
-        }
-
-        #askbutton:hover {
-            background-color: #244d8f;
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 6px 15px rgba(23, 54, 107, 0.2);
-        }
-
-        body.dark #askbutton {
-            color: #081326;
-
-            background-color: #d4b45f;
-        }
-
-        body.dark #askbutton:hover {
-            background-color: #e3c96b;
-
-            box-shadow:
-                0 6px 15px rgba(201, 168, 76, 0.2);
-        }
-
-
-        /* ==============================
-        CHAT ANSWER
-        ============================== */
-
-        #chatanswer {
-            margin-top: 18px;
-
-            padding: 16px;
-
-            min-height: 50px;
-
-            line-height: 1.6;
-
-            background-color: #f3f6fb;
-
-            border: 1px solid #ccd6e5;
-
-            border-left: 4px solid #c9a84c;
-
-            border-radius: 6px;
-        }
-
-        body.dark #chatanswer {
-            background-color: #132542;
-
-            border-color: #294368;
-
-            border-left-color: #c9a84c;
-        }
-
-
-        /* ==============================
-        CONTACT FORM
-        ============================== */
-
-        input,
-        textarea {
-            width: 100%;
-
-            padding: 13px 15px;
-
-            margin-top: 5px;
-            margin-bottom: 17px;
-
-            font-family: Arial, sans-serif;
-
-            font-size: 15px;
-
-            color: #17233d;
-
-            background-color: white;
-
-            border: 1px solid #aebbd0;
-
-            border-radius: 7px;
-
-            outline: none;
-
-            transition: 0.2s;
-        }
-
-        input:focus,
-        textarea:focus {
-            border-color: #17366b;
-
-            box-shadow:
-                0 0 0 3px rgba(23, 54, 107, 0.08);
-        }
-
-        body.dark input,
-        body.dark textarea {
-            color: white;
-
-            background-color: #09172c;
-
-            border-color: #304b76;
-        }
-
-        textarea {
-            height: 130px;
-
-            resize: vertical;
-        }
-
-
-        /* ==============================
-        SEND BUTTON
-        ============================== */
-
-        form button {
-            padding: 13px 23px;
-
-            font-weight: bold;
-
-            color: white;
-
-            background-color: #17366b;
-
-            border: none;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            transition: 0.25s;
-        }
-
-        form button:hover {
-            background-color: #244d8f;
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 6px 15px rgba(23, 54, 107, 0.2);
-        }
-
-        body.dark form button {
-            color: #081326;
-
-            background-color: #d4b45f;
-        }
-
-        body.dark form button:hover {
-            background-color: #e3c96b;
-        }
-
-
-        /* ==============================
-        SOCIAL LINKS
-        ============================== */
-
-        a {
-            position: relative;
-
-            color: #17366b;
-
-            font-weight: bold;
-
-            text-decoration: none;
-
-            transition: 0.2s;
-        }
-
-        a:hover {
-            color: #b08b25;
-
-            text-decoration: none;
-        }
-
-        a::after {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            bottom: -3px;
-
-            width: 0;
-            height: 2px;
-
-            background-color: #c9a84c;
-
-            transition: 0.2s;
-        }
-
-        a:hover::after {
-            width: 100%;
-        }
-
-        body.dark a {
-            color: #d9bd5d;
-        }
-
-        body.dark a:hover {
-            color: #f0d77d;
-        }
-
-
-        /* ==============================
-        MOBILE
-        ============================== */
-
-        @media screen and (max-width: 600px) {
-
-            body {
-                font-size: 15px;
-            }
-
-            #darkmd {
-                top: 12px;
-                right: 12px;
-
-                padding: 8px 13px;
-
-                font-size: 13px;
-            }
-
-            header {
-                padding: 75px 18px 55px;
-            }
-
-            header img {
-                width: 140px;
-                height: 140px;
-            }
-
-            header h1 {
-                font-size: 29px;
-            }
-
-            header h2 {
-                font-size: 17px;
-            }
-
-            header p {
-                font-size: 14px;
-            }
-
-            section {
-                margin: 25px 10px;
-
-                padding: 25px 20px;
-
-                border-radius: 11px;
-            }
-
-            section h2 {
-                font-size: 21px;
-            }
-
-            .projects {
-                flex-direction: column;
-            }
-
-            .project {
-                min-width: 100%;
-            }
-
-            #chatbot {
-                width: 100%;
-
-                margin-bottom: 10px;
-            }
-
-            #askbutton {
-                width: 100%;
-            }
-
-            .skills {
-                gap: 9px;
-            }
-
-            .skill {
-                padding: 9px 13px;
-
-                font-size: 13px;
-            }
-        }
-
-    </style>
-    
-    </head>
-
-
-    <body>
-
-        <button id="darkmd">Dark Mode</button>
-
-
-        <!-- HOME -->
-        <header id="home">
-
-            <!-- INSERT YOUR PROFILE PICTURE FILE NAME HERE -->
-            <img src="Profile-Pic.jpg" alt="Profile Picture">
-
-            <!-- INSERT YOUR NAME HERE -->
-            <h1>John Christian D Mea</h1>
-
-            <!-- INSERT YOUR PROFESSIONAL TITLE HERE -->
-            <h2>CS Student</h2>
-
-
-        </header>
-
-
-        <!-- ABOUT ME -->
-        <section id="about">
-
-            <h2>About Me</h2>
-
-            <!-- INSERT YOUR ABOUT ME DESCRIPTION HERE -->
-            <p>
-            Im currently developing my skills in programming as a 2nd-year Computer Science student. Im learning and practicing different areas of technology, including web development, databases, debugging, and problem-solving. Through school projects and personal practice, Im gaining a better understanding of how software and systems are created and how different technologies work together. Im also continuously learning new concepts and improving my ability to adapt to new tools and technologies.
-            </p>
-
-            <!-- INSERT YOUR EDUCATION HERE -->
-            <p>
-                Education: BS Computer Science - 2nd Year
-            </p>
-
-        </section>
-
-
-        <!-- SKILLS -->
-        <section id="skills">
-
-            <h2>Skills</h2>
-
-            <div class="skills">
-
-                <!-- INSERT YOUR SKILLS HERE -->
-                <div class="skill">Web Development</div>
-                <div class="skill">Database Management</div>
-                <div class="skill">PHP Programming</div>
-                <div class="skill">JavaScript</div>
-                <div class="skill">Debugging</div>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROJECTS -->
-        <section id="projects">
-
-            <h2>Projects</h2>
-
-            <div class="projects">
-
-                <div class="project">
-
-                    <!-- INSERT PROJECT 1 TITLE -->
-                    <h3>Automotive Shop Inventory System</h3>
-
-                    <!-- INSERT PROJECT 1 DESCRIPTION -->
-                    <p>
-                        A system designed to help an automotive shop manage and organize its products and inventory. It allows users to search for products, view important product information, and keep track of available items more efficiently.
-                    </p>
-
-                </div>
-
-
-                <div class="project">
-
-                    <!-- INSERT PROJECT 2 TITLE -->
-                    <h3>Payroll System</h3>
-
-                    <!-- INSERT PROJECT 2 DESCRIPTION -->
-                    <p>
-                        A payroll management system designed to help organize employee information and payroll records. It helps manage employee details, departments, positions, and salary-related information in one system.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ASK ABOUT ME -->
-        <section id="questions">
-
-            <h2>Ask About Me</h2>
-
-            <p>
-                You can ask questions about me.
-            </p>
-
-            <p>
-                Try asking:
-                "What are your skills?",
-                "What are your projects?",
-                or "What are you studying?"
-            </p>
-
-            <input
-                type="text"
-                id="chatbot"
-                placeholder="Ask a question"
+            <img
+                src="Profile-Pic.jpg"
+                alt="John Christian D Mea"
             >
 
-            <button id="askbutton">Ask</button>
-
-            <div id="chatanswer"></div>
-
-        </section>
+        </div>
 
 
-        <!-- CONTACT -->
-        <section id="contact">
+        <a href="#projects" class="map-node node-projects">
+            Projects
+        </a>
 
-            <h2>Contact Me</h2>
+        <a href="#contact" class="map-node node-contact">
+            Contact
+        </a>
 
-            <!-- INSERT YOUR EMAIL HERE -->
+    </div>
+
+
+    <div class="hero-note">
+        Explore the path
+    </div>
+
+</header>
+
+
+<!-- ==============================
+     ABOUT ME
+============================== -->
+
+<section id="about">
+
+    <h2>
+        About Me
+    </h2>
+
+    <div class="about-intro">
+
+        <p>
+            I am a BS Computer Science student currently building my
+            programming knowledge through school projects and personal practice.
+        </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+        <div class="about-box about-education">
+
+            <h3>
+                Education
+            </h3>
+
             <p>
-                Email:
-                cristianmea27@gmail.com
+                BS Computer Science<br>
+                2nd Year Student
             </p>
 
+        </div>
+
+
+        <div class="about-box about-focus">
+
+            <h3>
+                Current Focus
+            </h3>
 
             <p>
-                Social Media:
+                Learning programming, web development, databases,
+                and problem-solving through practical projects.
+            </p>
 
-                <!-- INSERT YOUR FACEBOOK LINK -->
-                <a href="https://www.facebook.com/johnchristian.mea" target="_blank">
-                    Facebook
-                </a>
+        </div>
 
-                |
 
-                <!-- INSERT YOUR GITHUB LINK -->
-                <a href="https://github.com/cristianmea27-a11y" target="_blank">
+        <div class="about-box about-growth">
+
+            <h3>
+                Growth
+            </h3>
+
+            <p>
+                Developing my ability to learn new technologies,
+                adapt to changes, and improve through experience.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     SKILLS
+============================== -->
+
+<section id="skills">
+
+    <h2>
+        Skills
+    </h2>
+
+    <p class="skills-intro">
+        A collection of technologies and areas I have worked with so far
+        as a Computer Science student.
+    </p>
+
+
+    <div class="skill-groups">
+
+        <div class="skill-group skill-web">
+
+            <h3>
+                Web Development
+            </h3>
+
+            <div class="skill-list">
+
+                <span class="skill">
+                    HTML
+                </span>
+
+                <span class="skill">
+                    CSS
+                </span>
+
+                <span class="skill">
+                    JavaScript
+                </span>
+
+                <span class="skill">
+                    PHP
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-group skill-programming">
+
+            <h3>
+                Programming
+            </h3>
+
+            <div class="skill-list">
+
+                <span class="skill">
+                    Python
+                </span>
+
+                <span class="skill">
+                    JavaScript
+                </span>
+
+                <span class="skill">
+                    PHP
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-group skill-database">
+
+            <h3>
+                Database
+            </h3>
+
+            <div class="skill-list">
+
+                <span class="skill">
+                    MySQL
+                </span>
+
+                <span class="skill">
+                    SQL
+                </span>
+
+                <span class="skill">
+                    Supabase
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-group skill-tools">
+
+            <h3>
+                Tools
+            </h3>
+
+            <div class="skill-list">
+
+                <span class="skill">
+                    VS Code
+                </span>
+
+                <span class="skill">
                     GitHub
+                </span>
+
+                <span class="skill">
+                    Laragon
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-group skill-learning">
+
+            <h3>
+                Currently Learning
+            </h3>
+
+            <div class="skill-list">
+
+                <span class="skill">
+                    Data Structures
+                </span>
+
+                <span class="skill">
+                    Algorithms
+                </span>
+
+                <span class="skill">
+                    Backend Development
+                </span>
+
+                <span class="skill">
+                    Git
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     PROJECTS
+============================== -->
+
+<section id="projects">
+
+    <h2>
+        Projects
+    </h2>
+
+
+    <div class="projects">
+
+
+        <div class="project">
+
+            <div class="project-image">
+
+                <img
+                    src="Project1.png"
+                    alt="Automotive Shop Inventory System"
+                >
+
+            </div>
+
+
+            <div class="project-content">
+
+                <div class="project-number">
+                    PROJECT 01
+                </div>
+
+                <h3>
+                    Automotive Shop Inventory System
+                </h3>
+
+                <p>
+                    An inventory system designed to help an automotive shop
+                    organize products and make information easier to find.
+                </p>
+
+                <div class="project-tags">
+
+                    <span>
+                        Inventory
+                    </span>
+
+                    <span>
+                        Database
+                    </span>
+
+                    <span>
+                        Web Development
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="project">
+
+            <div class="project-image">
+
+                <img
+                    src="Project2.png"
+                    alt="LCC Payroll System"
+                >
+
+            </div>
+
+
+            <div class="project-content">
+
+                <div class="project-number">
+                    PROJECT 02
+                </div>
+
+                <h3>
+                    Payroll System
+                </h3>
+
+                <p>
+                    A payroll and employee management system designed to
+                    organize employee information and payroll-related records.
+                </p>
+
+                <div class="project-tags">
+
+                    <span>
+                        PHP
+                    </span>
+
+                    <span>
+                        Database
+                    </span>
+
+                    <span>
+                        Employee Management
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     FLOATING CHATBOT
+============================== -->
+
+<div class="chatbot-container">
+
+    <button id="chatbot-button">
+        💬
+    </button>
+
+
+    <div class="chatbot-box" id="chatbot-box">
+
+        <div class="chatbot-header">
+
+            <div>
+
+                <strong>
+                    Ask About Me
+                </strong>
+
+                <small>
+                    Portfolio Assistant
+                </small>
+
+            </div>
+
+            <button id="chatbot-close">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="chatbot-answer" id="chatbot-answer">
+
+            Hi! What would you like to know about me?
+
+        </div>
+
+
+        <div class="chatbot-questions">
+
+            <button
+                class="chat-question"
+                data-answer="My current skills include HTML, CSS, JavaScript, PHP, Python, MySQL, SQL, and basic web development."
+            >
+                What are your skills?
+            </button>
+
+
+            <button
+                class="chat-question"
+                data-answer="My main projects are an Automotive Shop Inventory System and an LCC Payroll System."
+            >
+                What are your projects?
+            </button>
+
+
+            <button
+                class="chat-question"
+                data-answer="I am currently a 2nd-year BS Computer Science student."
+            >
+                What are you studying?
+            </button>
+
+
+            <button
+                class="chat-question"
+                data-answer="Some of the tools I work with are VS Code, GitHub, and Laragon."
+            >
+                What tools do you use?
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     CONTACT
+============================== -->
+
+<section id="contact">
+
+    <h2>
+        Contact Me
+    </h2>
+
+
+    <div class="contact-info">
+
+
+        <div class="contact-card">
+
+            <h3>
+                Get in Touch
+            </h3>
+
+
+            <p>
+
+                Email:
+
+                <a href="mailto:cristianmea27@gmail.com">
+                    cristianmea27@gmail.com
                 </a>
 
             </p>
 
 
-            <h3>Send a Message</h3>
+            <div class="social-links">
 
-            <form>
+                <a
+                    href="https://github.com/cristianmea27-a11y"
+                    target="_blank"
+                    title="GitHub"
+                >
+                    GH
+                </a>
 
-                <label>Name:</label>
+
+                <a
+                    title="LinkedIn"
+                >
+                    in
+                </a>
+
+
+                <a
+                    href="https://www.facebook.com/johnchristian.mea"
+                    target="_blank"
+                    title="Facebook"
+                >
+                    f
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <h3>
+                Send a Message
+            </h3>
+
+
+            <form
+                onsubmit="return showMessage();"
+            >
+
+                <label for="name">
+                    Name:
+                </label>
 
                 <input
                     type="text"
+                    id="name"
+                    name="name"
                     placeholder="Enter your name"
+                    required
+                    minlength="2"
                 >
 
 
-                <label>Email:</label>
+                <label for="email">
+                    Email:
+                </label>
 
                 <input
                     type="email"
+                    id="email"
+                    name="email"
                     placeholder="Enter your email"
+                    required
                 >
 
 
-                <label>Message:</label>
+                <label for="message">
+                    Message:
+                </label>
 
                 <textarea
+                    id="message"
+                    name="message"
                     placeholder="Enter your message"
+                    required
+                    minlength="5"
                 ></textarea>
 
 
@@ -1050,69 +2128,100 @@
 
             </form>
 
-        </section>
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    /* ==============================
+       DARK MODE
+    ============================== */
+
+    var button = document.getElementById("darkmd");
+
+    button.addEventListener("click", function() {
+
+        document.body.classList.toggle("dark");
+
+        if (document.body.classList.contains("dark")) {
+
+            button.textContent = "Light Mode";
+
+        } else {
+
+            button.textContent = "Dark Mode";
+
+        }
+
+    });
 
 
-        <script type="text/javascript">
+    /* ==============================
+       CHATBOT
+    ============================== */
 
-            // DARK MODE
+    var chatbotButton =
+        document.getElementById("chatbot-button");
 
-            var button = document.getElementById("darkmd");
+    var chatbotBox =
+        document.getElementById("chatbot-box");
 
-            button.addEventListener("click", function() {
-
-                document.body.classList.toggle("dark");
-
-            });
-
-
-            // CHATBOT
-
-            var askbutton = document.getElementById("askbutton");
-
-            askbutton.addEventListener("click", function() {
-
-                var question =
-                    document.getElementById("chatbot").value.toLowerCase();
-
-                var answer =
-                    document.getElementById("chatanswer");
+    var chatbotClose =
+        document.getElementById("chatbot-close");
 
 
-                if (question.includes("skill")) {
+    chatbotButton.addEventListener("click", function() {
 
-                    answer.innerHTML =
-                        "My skills include Web Development, Database Organization, Debugging, Database Management, and Adaptation. Im also continuously improving my programming and problem-solving skills.";
+        chatbotBox.classList.toggle("show");
 
-                }
+    });
 
-                else if (question.includes("project")) {
 
-                    answer.innerHTML =
-                        "I have worked on an Automotive Shop Inventory System and an LCC Payroll System. These projects helped me practice programming, databases, and web development.";
+    chatbotClose.addEventListener("click", function() {
 
-                }
+        chatbotBox.classList.remove("show");
 
-                else if (
-                    question.includes("study") ||
-                    question.includes("course")
-                ) {
+    });
 
-                    answer.innerHTML =
-                        "Im currently a 2nd-year BS Computer Science student. Im studying programming, web development, databases, and other computer science concepts.";
 
-                }
+    var questions =
+        document.querySelectorAll(".chat-question");
 
-                else {
+    var chatbotAnswer =
+        document.getElementById("chatbot-answer");
 
-                    answer.innerHTML =
-                        "Sorry, I don't have an answer for that question.";
 
-                }
+    questions.forEach(function(question) {
 
-            });
+        question.addEventListener("click", function() {
 
-        </script>
+            chatbotAnswer.textContent =
+                question.getAttribute("data-answer");
 
-    </body>
+        });
+
+    });
+
+
+    /* ==============================
+       CONTACT FORM
+    ============================== */
+
+    function showMessage() {
+
+        alert(
+            "The form is working, but message sending has not been connected yet."
+        );
+
+        return false;
+
+    }
+
+</script>
+
+</body>
+
 </html>
