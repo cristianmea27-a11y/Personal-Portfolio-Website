@@ -6,2222 +6,2671 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <title>John Christian D Mea | Portfolio</title>
 
+
 <style>
 
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --dark: #081326;
+    --dark-blue: #102f60;
+    --blue: #17366b;
+    --gold: #c9a84c;
+    --gold-light: #d4b45f;
+    --gold-soft: #eadcae;
+    --light-bg: #faf8f1;
+    --light-surface: #ffffff;
+    --light-soft: #f3eedc;
+    --light-text: #161616;
+    --light-secondary: #5d5748;
+    --text-light: #536174;
+    --border: #e3d8b5;
+    --transition-dark: #081326;
+    --transition-light: #faf8f1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: var(--light-bg);
+    color: var(--light-text);
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+}
+
+body.dark {
+    background: var(--dark);
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =========================================
+   THEME TRANSITION
+========================================= */
+
+#theme-transition {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+    border-radius: 50%;
+    background: #081326;
+    border: 5px solid var(--gold);
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,0.9),
+        0 0 35px rgba(201,168,76,0.45);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100000;
+    will-change: transform, opacity;
+}
+
+body.theme-animating {
+    overflow: hidden;
+}
+
+body.theme-animating #darkmd {
+    pointer-events: none;
+}
+
+#theme-transition.expand {
+    opacity: 1;
+    animation:
+        themeExpand 1.15s
+        cubic-bezier(0.76, 0, 0.24, 1)
+        forwards;
+}
+
+@keyframes themeExpand {
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.05);
+        border-width: 5px;
     }
 
-    html {
-        scroll-behavior: smooth;
+    15% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.8);
+        border-width: 6px;
     }
 
-    body {
-        margin: 0;
-        padding: 0;
-
-        font-family: Arial, sans-serif;
-
-        color: #17233d;
-
-        background:
-            radial-gradient(circle at 10% 10%, rgba(201,168,76,0.08), transparent 25%),
-            radial-gradient(circle at 90% 30%, rgba(23,54,107,0.08), transparent 30%),
-            #eef2f8;
-
-        transition: background-color 0.3s, color 0.3s;
+    35% {
+        transform:
+            translate(-50%, -50%)
+            scale(3);
+        border-width: 7px;
     }
 
-    body.dark {
-        color: #e8edf7;
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(var(--transition-scale));
+        border-width: 0;
+    }
+}
 
-        background:
-            radial-gradient(circle at 10% 10%, rgba(201,168,76,0.07), transparent 25%),
-            radial-gradient(circle at 90% 30%, rgba(31,74,140,0.12), transparent 30%),
-            #081326;
+#theme-transition.retract {
+    opacity: 1;
+    transform:
+        translate(-50%, -50%)
+        scale(var(--transition-scale));
+    border-width: 0;
+    animation:
+        themeRetract 1.15s
+        cubic-bezier(0.76, 0, 0.24, 1)
+        forwards;
+}
+
+@keyframes themeRetract {
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(var(--transition-scale));
+        border-width: 0;
     }
 
-
-    /* ==============================
-       DARK MODE BUTTON
-    ============================== */
-
-    #darkmd {
-        position: fixed;
-
-        top: 20px;
-        right: 25px;
-
-        padding: 10px 17px;
-
-        font-weight: bold;
-        font-size: 14px;
-
-        color: white;
-        background: rgba(13,29,56,0.95);
-
-        border: 1px solid #d4b45f;
-        border-radius: 20px;
-
-        cursor: pointer;
-
-        z-index: 100;
-
-        box-shadow: 0 5px 15px rgba(0,0,0,0.18);
-
-        transition: 0.3s;
+    65% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.8);
+        border-width: 5px;
     }
 
-    #darkmd:hover {
-        color: #081326;
-        background-color: #d4b45f;
-
-        transform: translateY(-2px);
+    85% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.35);
+        border-width: 5px;
     }
 
-    body.dark #darkmd {
-        color: #081326;
-        background-color: #d4b45f;
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.05);
+        border-width: 5px;
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   DARK MODE BUTTON
+========================================= */
+
+#darkmd {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    z-index: 10000;
+    padding: 10px 17px;
+    border: 1px solid var(--gold);
+    border-radius: 25px;
+    background: white;
+    color: #111;
+    cursor: pointer;
+    font-weight: bold;
+    transition:
+        background 0.3s,
+        color 0.3s,
+        border-color 0.3s,
+        transform 0.2s;
+}
+
+#darkmd:hover {
+    background: var(--gold);
+    color: white;
+    transform: translateY(-2px);
+}
+
+body.dark #darkmd {
+    background: #10203a;
+    color: white;
+    border-color: var(--gold);
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+#home {
+    min-height: 100vh;
+    padding: 90px 5% 70px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+body.dark #home {
+    background-color: var(--dark);
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        );
+    background-size: 55px 55px;
+}
+
+
+/* =========================================
+   HERO INTRO
+========================================= */
+
+.hero-intro {
+    text-align: left;
+    margin: 0;
+    max-width: 600px;
+    justify-self: end;
+    position: relative;
+    z-index: 6;
+}
+
+.hero-intro h1 {
+    margin: 0;
+    font-size: clamp(42px, 6vw, 75px);
+    letter-spacing: -2px;
+    color: #111111;
+}
+
+body.dark .hero-intro h1 {
+    color: white;
+}
+
+.hero-intro h2 {
+    margin: 12px 0;
+    font-size: 20px;
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.hero-intro p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+    color: var(--light-secondary);
+}
+
+body.dark .hero-intro p {
+    color: #b7c3d4;
+}
+
+
+/* =========================================
+   PERSONAL MAP
+========================================= */
+
+.personal-map {
+    width: min(720px, 100%);
+    height: 580px;
+    position: relative;
+    margin: 0;
+    justify-self: start;
+}
+
+
+/* =========================================
+   DARK HUB AROUND PROFILE
+========================================= */
+
+.personal-map::before {
+    display: none;
+}
+
+body.dark .personal-map::before {
+    width: 430px;
+    height: 430px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(8,19,38,0.35),
+            rgba(8,19,38,0.05) 65%,
+            transparent 75%
+        );
+    box-shadow:
+        0 0 70px rgba(201,168,76,0.06);
+}
+
+
+/* =========================================
+   PROFILE IMAGE
+========================================= */
+
+.profile-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 190px;
+    height: 190px;
+    padding: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+
+    box-shadow:
+        0 0 0 4px var(--dark-blue),
+        0 0 0 7px var(--dark-blue),
+        0 0 0 10px var(--gold);
+
+    z-index: 100001;
+}
+
+body.dark .profile-center {
+    box-shadow:
+        0 0 0 4px var(--dark-blue),
+        0 0 0 7px var(--dark-blue),
+        0 0 0 11px rgba(201,168,76,0.18);
+}
+
+.profile-center img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+
+/* =========================================
+   BRANCH LINES
+========================================= */
+
+.branch {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 2px;
+    background: var(--gold);
+    opacity: 0.9;
+    transform-origin: left center;
+    z-index: 2;
+    transition:
+        background 0.3s,
+        opacity 0.3s;
+}
+
+/*
+   The profile center is the starting point
+   for every line.
+
+   All buttons are positioned around the
+   profile at equal distance.
+*/
+
+/* My Works — straight up */
+.branch-works {
+    width: 255px;
+    transform:
+        translateY(-50%)
+        rotate(-90deg);
+}
+
+/* About Me — upper left */
+.branch-about {
+    width: 300px;
+    transform:
+        translateY(-50%)
+        rotate(-148deg);
+}
+
+/* Skills — upper right */
+.branch-skills {
+    width: 300px;
+    transform:
+        translateY(-50%)
+        rotate(-32deg);
+}
+
+/* Experience — lower left */
+.branch-experience {
+    width: 300px;
+    transform:
+        translateY(-50%)
+        rotate(148deg);
+}
+
+/* Contact — lower right */
+.branch-contact {
+    width: 300px;
+    transform:
+        translateY(-50%)
+        rotate(32deg);
+}
+
+
+/* =========================================
+   NAVIGATION NODES
+========================================= */
+
+.map-node {
+    position: absolute;
+    width: 150px;
+    min-height: 75px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--gold);
+    border-radius: 18px;
+    background: #ffffff;
+    color: #111111;
+    font-weight: bold;
+    text-align: center;
+    box-shadow:
+        0 8px 25px rgba(94,77,25,0.10);
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s,
+        background 0.3s,
+        color 0.3s,
+        border-color 0.3s;
+    z-index: 4;
+}
+
+.map-node i {
+    color: var(--gold);
+}
+
+.map-node:hover {
+    transform: scale(1.08);
+    background: #fffdf5;
+    border-color: var(--gold);
+    box-shadow:
+        0 15px 40px rgba(201,168,76,0.25);
+}
+
+body.dark .map-node {
+    background: #10203a;
+    color: white;
+    border-color: var(--gold);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.25);
+}
+
+body.dark .map-node:hover {
+    background: #162c4b;
+}
+
+/* =========================================
+   NAVIGATION POSITIONS
+========================================= */
+
+/* My Works */
+.node-works {
+    left: 50%;
+    top: -5px;
+    transform: translateX(-50%);
+}
+
+/* About Me */
+.node-about {
+    left: 5px;
+    top: 105px;
+}
+
+/* Skills */
+.node-skills {
+    right: 5px;
+    top: 105px;
+}
+
+/* Experience */
+.node-experience {
+    left: 5px;
+    bottom: 105px;
+}
+
+/* Contact */
+.node-contact {
+    right: 5px;
+    bottom: 105px;
+}
+
+
+/* Keep My Works centered when hovering */
+.node-works:hover {
+    transform:
+        translateX(-50%)
+        scale(1.08);
+}
+
+/* =========================================
+   EXPERIENCE
+========================================= */
+
+.experience-node {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.experience-node:hover {
+    transform: none;
+    background: #ffffff;
+    box-shadow:
+        0 8px 25px rgba(94,77,25,0.10);
+}
+
+body.dark .experience-node:hover {
+    background: #10203a;
+}
+
+
+/* =========================================
+   GENERAL SECTIONS
+========================================= */
+
+section {
+    position: relative;
+    padding: 100px 7%;
+}
+
+body:not(.dark) #about,
+body:not(.dark) #projects {
+    background: var(--light-bg);
+}
+
+body:not(.dark) #skills,
+body:not(.dark) #contact {
+    background: var(--light-soft);
+}
+
+body.dark section {
+    background: var(--dark);
+}
+
+
+/* =========================================
+   SECTION TITLES
+========================================= */
+
+.section-title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #111111;
+}
+
+body.dark .section-title {
+    color: white;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+    line-height: 1.7;
+    color: var(--light-secondary);
+}
+
+body.dark .section-subtitle {
+    color: #aebbcf;
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+.about-container {
+    max-width: 1150px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.about-card {
+    padding: 30px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow:
+        0 12px 35px rgba(94,77,25,0.07);
+    transition:
+        transform 0.3s,
+        border-color 0.3s,
+        box-shadow 0.3s;
+}
+
+.about-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow:
+        0 18px 40px rgba(201,168,76,0.13);
+}
+
+.about-card > i {
+    color: var(--gold);
+    margin-right: 8px;
+}
+
+.about-card h3 {
+    display: inline;
+    margin: 0;
+    color: #111111;
+}
+
+.about-card p {
+    line-height: 1.7;
+    color: var(--light-secondary);
+}
+
+body.dark .about-card {
+    background: #0d1b30;
+    border-color: #243654;
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.18);
+}
+
+body.dark .about-card h3 {
+    color: white;
+}
+
+body.dark .about-card p {
+    color: #aebbcf;
+}
+
+.about-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.about-item i {
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.skills-container {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.skill-group {
+    padding: 28px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow:
+        0 12px 35px rgba(94,77,25,0.07);
+    transition:
+        transform 0.3s,
+        border-color 0.3s;
+}
+
+.skill-group:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.skill-group h3 {
+    margin-top: 0;
+    color: #111111;
+}
+
+.skill-group h3 i {
+    color: var(--gold);
+    margin-right: 8px;
+}
+
+.skill-group p {
+    color: var(--light-secondary);
+    line-height: 1.6;
+}
+
+body.dark .skill-group {
+    background: #0d1b30;
+    border-color: #243654;
+}
+
+body.dark .skill-group h3 {
+    color: white;
+}
+
+body.dark .skill-group p {
+    color: #aebbcf;
+}
+
+
+/* =========================================
+   SKILL TAGS
+========================================= */
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: var(--light-soft);
+    border: 1px solid var(--border);
+    color: #111111;
+    font-size: 13px;
+}
+
+body.dark .tag {
+    background: #142744;
+    border-color: #2a4263;
+    color: #d8e0ec;
+}
+
+
+/* =========================================
+   CURRENTLY LEARNING
+========================================= */
+
+.currently-learning {
+    grid-column: 1 / -1;
+    padding: 20px 25px;
+    background: #fffdf7;
+    border: 1px dashed #d5c58e;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.currently-learning h3 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--light-secondary);
+    white-space: nowrap;
+}
+
+.currently-learning h3 i {
+    color: var(--gold);
+    margin-right: 7px;
+}
+
+.currently-learning .skill-tags {
+    justify-content: flex-end;
+}
+
+.currently-learning .tag {
+    font-size: 12px;
+    padding: 6px 11px;
+    background: transparent;
+    border: 1px solid #d5c58e;
+    color: #6b634e;
+}
+
+body.dark .currently-learning {
+    background: #0c192c;
+    border-color: #344967;
+}
+
+body.dark .currently-learning h3 {
+    color: #aebbcf;
+}
+
+body.dark .currently-learning .tag {
+    color: #aebbcf;
+    border-color: #344967;
+}
+
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+.projects-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.project-card {
+    overflow: hidden;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow:
+        0 12px 35px rgba(94,77,25,0.07);
+    transition:
+        transform 0.3s,
+        border-color 0.3s,
+        box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow:
+        0 18px 45px rgba(201,168,76,0.14);
+}
+
+.project-image {
+    width: 100%;
+    aspect-ratio: 1890 / 876;
+    overflow: hidden;
+    background: #081326;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.project-content {
+    padding: 30px;
+}
+
+.project-content h3 {
+    margin-top: 0;
+    color: #111111;
+}
+
+.project-content h3 i {
+    color: var(--gold);
+    margin-right: 8px;
+}
+
+.project-description {
+    color: var(--light-secondary);
+    line-height: 1.7;
+}
+
+.problem,
+.solution {
+    margin-top: 20px;
+    padding: 18px;
+    border-left: 3px solid var(--gold);
+    background: var(--light-soft);
+}
+
+.problem h4,
+.solution h4 {
+    margin-top: 0;
+    color: #111111;
+}
+
+.problem p,
+.solution p {
+    margin-bottom: 0;
+    line-height: 1.6;
+    color: var(--light-secondary);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.project-tags span {
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: var(--light-soft);
+    border: 1px solid var(--border);
+    color: #111111;
+    font-size: 12px;
+}
+
+body.dark .project-card {
+    background: #0d1b30;
+    border-color: #243654;
+}
+
+body.dark .project-content h3 {
+    color: white;
+}
+
+body.dark .project-description {
+    color: #aebbcf;
+}
+
+body.dark .problem,
+body.dark .solution {
+    background: #111f35;
+}
+
+body.dark .problem h4,
+body.dark .solution h4 {
+    color: white;
+}
+
+body.dark .problem p,
+body.dark .solution p {
+    color: #aebbcf;
+}
+
+body.dark .project-tags span {
+    background: #142744;
+    border-color: #2a4263;
+    color: #d8e0ec;
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact-container {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.contact-card {
+    padding: 30px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow:
+        0 12px 35px rgba(94,77,25,0.07);
+}
+
+.contact-card h3 {
+    margin-top: 0;
+    color: #111111;
+}
+
+.contact-card h3 i {
+    color: var(--gold);
+    margin-right: 8px;
+}
+
+.contact-card p {
+    color: var(--light-secondary);
+    line-height: 1.7;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fffdf7;
+    transition:
+        border-color 0.3s,
+        transform 0.2s,
+        background 0.3s;
+}
+
+.contact-link:hover {
+    transform: translateX(5px);
+    border-color: var(--gold);
+    background: white;
+}
+
+.contact-link i {
+    width: 25px;
+    color: var(--gold);
+    text-align: center;
+}
+
+.contact-link small {
+    color: #756d59;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #dfd4b2;
+    border-radius: 10px;
+    background: white;
+    color: #111111;
+    outline: none;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--gold);
+    box-shadow:
+        0 0 0 3px rgba(201,168,76,0.10);
+}
+
+.contact-form button {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #111111;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition:
+        background 0.3s,
+        transform 0.2s;
+}
+
+.contact-form button:hover {
+    background: var(--gold);
+    transform: translateY(-2px);
+}
+
+body.dark .contact-card {
+    background: #0d1b30;
+    border-color: #243654;
+}
+
+body.dark .contact-card h3 {
+    color: white;
+}
+
+body.dark .contact-card p {
+    color: #aebbcf;
+}
+
+body.dark .contact-link {
+    background: #111f35;
+    border-color: #2a4263;
+}
+
+body.dark .contact-link:hover {
+    border-color: var(--gold);
+    background: #142744;
+}
+
+body.dark .contact-link small {
+    color: #9cabc0;
+}
+
+body.dark .contact-form input,
+body.dark .contact-form textarea {
+    background: #0b1729;
+    border-color: #2a4263;
+    color: white;
+}
+
+body.dark .contact-form button {
+    background: var(--gold);
+    color: #081326;
+}
+
+
+/* =========================================
+   CHATBOT
+========================================= */
+
+.chatbot {
+    position: fixed;
+    right: 25px;
+    bottom: 95px;
+    width: 340px;
+    max-width: calc(100vw - 40px);
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.18);
+
+    /* Keep chatbot above the entire homepage map */
+    z-index: 200000;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px) scale(0.96);
+    pointer-events: none;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+}
+
+.chatbot.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+body.dark .chatbot {
+    background: #0d1b30;
+    border-color: #2a4263;
+}
+
+.chat-header {
+    padding: 16px;
+    background: var(--dark);
+    color: white;
+    border-bottom: 2px solid var(--gold);
+}
+
+.chat-header strong {
+    display: block;
+    font-size: 16px;
+}
+
+.chat-header small {
+    display: block;
+    margin-top: 4px;
+    color: #b7c3d4;
+    font-weight: normal;
+}
+
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 12px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message {
+    max-width: 82%;
+    padding: 9px 12px;
+    border-radius: 14px;
+    margin: 6px 0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: var(--light-soft);
+    color: #111111;
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: var(--gold);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+body.dark .bot-message {
+    background: #142744;
+    color: #d8e0ec;
+}
+
+.typing {
+    align-self: flex-start;
+    background: var(--light-soft);
+    color: var(--light-secondary);
+    padding: 8px 12px;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    margin: 6px 0;
+    font-size: 13px;
+    font-style: italic;
+}
+
+body.dark .typing {
+    background: #142744;
+    color: #aebbcf;
+}
+
+.chat-questions {
+    padding: 12px 15px 15px;
+    border-top: 1px solid var(--border);
+}
+
+.chat-question {
+    width: 100%;
+    padding: 9px 11px;
+    margin-bottom: 7px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--light-soft);
+    color: #111111;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        border-color 0.2s,
+        background 0.2s,
+        transform 0.2s;
+}
+
+.chat-question:last-child {
+    margin-bottom: 0;
+}
+
+.chat-question:hover {
+    border-color: var(--gold);
+    background: #fffdf5;
+    transform: translateX(3px);
+}
+
+body.dark .chat-question {
+    background: #142744;
+    border-color: #2a4263;
+    color: white;
+}
+
+body.dark .chat-question:hover {
+    background: #1a3152;
+    border-color: var(--gold);
+}
+
+.chat-toggle {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background: var(--gold);
+    color: white;
+    cursor: pointer;
+
+    /* Keep chatbot button above everything */
+    z-index: 200000;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.18);
+    transition:
+        transform 0.25s,
+        background 0.25s;
+}
+
+.chat-toggle:hover {
+    transform: scale(1.08);
+    background: var(--gold-light);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .about-container {
+        grid-template-columns: 1fr;
     }
 
-    body.dark #darkmd:hover {
-        color: white;
-        background-color: #17366b;
+    .skills-container {
+        grid-template-columns: 1fr;
     }
 
-
-    /* ==============================
-       HOME
-    ============================== */
-
-    header {
-        position: relative;
-
-        height: 100vh;
-        min-height: 600px;
-
-        padding: 35px 20px 30px;
-
-        overflow: hidden;
-
-        color: white;
-        text-align: center;
-
-        background:
-            radial-gradient(circle at center, rgba(201,168,76,0.12), transparent 35%),
-            linear-gradient(135deg, #081a38, #102f60, #081a38);
-
-        border-bottom: 4px solid #d4b45f;
-
-        transition: background 0.4s;
+    .contact-container {
+        grid-template-columns: 1fr;
     }
 
-    header::before {
-        content: "";
-
-        position: absolute;
-
-        width: 350px;
-        height: 350px;
-
-        top: -180px;
-        left: -100px;
-
-        border: 1px solid rgba(212,180,95,0.18);
-
-        border-radius: 50%;
+    .currently-learning {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    header::after {
-        content: "";
-
-        position: absolute;
-
-        width: 450px;
-        height: 450px;
-
-        right: -180px;
-        bottom: -300px;
-
-        border: 1px solid rgba(212,180,95,0.15);
-
-        border-radius: 50%;
+    .currently-learning .skill-tags {
+        justify-content: flex-start;
     }
-
-    .hero-intro {
-        position: relative;
-
-        z-index: 3;
-
-        text-align: center;
-
-        max-width: 650px;
-
-        margin: 0 auto 10px;
-    }
-
-    .hero-label {
-        margin: 0 0 8px;
-
-        color: #d4b45f;
-
-        font-size: 12px;
-        font-weight: bold;
-
-        letter-spacing: 3px;
-    }
-
-    .hero-intro h1 {
-        margin: 0;
-
-        font-size: 38px;
-        letter-spacing: 1px;
-
-        color: #f4f6fa;
-    }
-
-    .hero-intro h2 {
-        margin: 6px 0;
-
-        font-size: 18px;
-        font-weight: normal;
-
-        color: #d9e2f2;
-    }
-
-    .hero-intro p {
-        max-width: 560px;
-
-        margin: 10px auto 0;
-
-        line-height: 1.4;
-
-        font-size: 14px;
-
-        color: #c9d5e8;
-    }
-
-
-    /* ==============================
-       PERSONAL MAP
-    ============================== */
 
     .personal-map {
-        position: relative;
+        transform: scale(0.9);
+        transform-origin: center;
+    }
+}
 
-        width: 760px;
-        height: 340px;
 
-        max-width: 100%;
+@media (max-width: 850px) {
 
-        margin: auto;
+    .personal-map {
+        width: 850px;
+        height: 520px;
+        transform: scale(0.82);
+        transform-origin: center;
     }
 
     .profile-center {
-        position: absolute;
-
-        width: 190px;
-        height: 190px;
-
-        left: 50%;
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-
-        z-index: 5;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-    }
-
-    .profile-center::before {
-        content: "";
-
-        position: absolute;
-
-        inset: -17px;
-
-        border: 1px solid rgba(212,180,95,0.45);
-
-        border-radius: 50%;
-    }
-
-    .profile-center::after {
-        content: "";
-
-        position: absolute;
-
-        inset: -32px;
-
-        border: 1px dashed rgba(212,180,95,0.18);
-
-        border-radius: 50%;
-    }
-
-    .profile-center img {
         width: 165px;
         height: 165px;
+    }
 
-        object-fit: cover;
-
-        border-radius: 50%;
-
-        border: 4px solid #d4b45f;
-
-        box-shadow:
-            0 0 0 7px rgba(255,255,255,0.04),
-            0 12px 30px rgba(0,0,0,0.45);
-
-        transition: 0.4s;
+    .personal-map::before {
+        width: 350px;
+        height: 350px;
     }
 
     .branch {
-        position: absolute;
-
-        width: 300px;
-        height: 2px;
-
-        background: #d4b45f;
-
-        transform-origin: left center;
-
-        opacity: 0.75;
-
-        z-index: 1;
-    }
-
-    .branch-about {
-        left: 380px;
-        top: 170px;
-
-        transform: rotate(204deg);
-    }
-
-    .branch-skills {
-        left: 380px;
-        top: 170px;
-
-        transform: rotate(156deg);
-    }
-
-    .branch-projects {
-        left: 380px;
-        top: 170px;
-
-        transform: rotate(-24deg);
-    }
-
-    .branch-contact {
-        left: 380px;
-        top: 170px;
-
-        transform: rotate(24deg);
+        width: 220px;
     }
 
     .map-node {
-        position: absolute;
-
-        z-index: 6;
-
-        width: 145px;
-
-        padding: 13px 15px;
-
-        color: #e8edf7;
-
-        background: rgba(8,26,56,0.94);
-
-        border: 1px solid #d4b45f;
-        border-radius: 8px;
-
-        text-align: center;
-        text-decoration: none;
-
-        transition: 0.3s;
-    }
-
-    .map-node:hover {
-        color: #081326;
-
-        background: #d4b45f;
-
-        transform: translateY(-3px);
+        width: 135px;
+        min-height: 68px;
+        font-size: 13px;
     }
 
     .node-about {
-        left: 4%;
-        top: 2%;
+        left: 92px;
+        top: 155px;
     }
 
     .node-skills {
-        left: 4%;
-        bottom: 2%;
+        right: 92px;
+        top: 155px;
     }
 
-    .node-projects {
-        right: 4%;
-        top: 2%;
+    .node-experience {
+        left: 92px;
+        bottom: 155px;
     }
 
     .node-contact {
-        right: 4%;
-        bottom: 2%;
+        right: 92px;
+        bottom: 155px;
     }
+}
 
-    .hero-note {
-        position: absolute;
 
-        bottom: 18px;
-        left: 50%;
+@media (max-width: 600px) {
 
-        transform: translateX(-50%);
-
-        z-index: 3;
-
-        color: #b9c7dc;
-
+    #darkmd {
+        top: 12px;
+        right: 12px;
+        padding: 8px 12px;
         font-size: 12px;
-
-        letter-spacing: 1px;
     }
 
-    body.dark header {
-        background:
-            radial-gradient(circle at center, rgba(212,180,95,0.18), transparent 38%),
-            linear-gradient(135deg, #050d1c, #0b2348, #050d1c);
-
-        border-bottom-color: #d4b45f;
+    #home {
+        padding-top: 80px;
     }
 
-    body.dark .map-node {
-        color: #edf2fa;
-
-        background: rgba(5,15,32,0.94);
-
-        border-color: #d4b45f;
+    .hero-intro h1 {
+        font-size: 42px;
     }
 
-    body.dark .hero-intro h1 {
-        color: #ffffff;
+    .hero-intro h2 {
+        font-size: 17px;
     }
 
-    body.dark .profile-center img {
-        box-shadow:
-            0 0 0 7px rgba(212,180,95,0.06),
-            0 0 35px rgba(212,180,95,0.12),
-            0 12px 30px rgba(0,0,0,0.55);
+    .hero-intro p {
+        font-size: 14px;
     }
 
+    .personal-map {
+        width: 850px;
+        height: 480px;
+        transform: scale(0.63);
+        transform-origin: center;
+    }
 
-    /* ==============================
-       SECTIONS
-    ============================== */
+    .profile-center {
+        width: 150px;
+        height: 150px;
+    }
+
+    .personal-map::before {
+        width: 320px;
+        height: 320px;
+    }
+
+    .branch {
+        width: 200px;
+    }
+
+    .map-node {
+        width: 125px;
+        min-height: 62px;
+        font-size: 12px;
+    }
+
+    .node-about {
+        left: 100px;
+        top: 140px;
+    }
+
+    .node-skills {
+        right: 100px;
+        top: 140px;
+    }
+
+    .node-experience {
+        left: 100px;
+        bottom: 140px;
+    }
+
+    .node-contact {
+        right: 100px;
+        bottom: 140px;
+    }
 
     section {
-        max-width: 1000px;
-
-        min-height: calc(100vh - 40px);
-
-        margin: 20px auto;
-
-        padding: 55px 45px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        background: rgba(255,255,255,0.96);
-
-        border: 1px solid #d4dce9;
-
-        border-radius: 14px;
-
-        border-top: 4px solid #17366b;
-
-        box-shadow: 0 8px 30px rgba(15,35,70,0.08);
-
-        transition: 0.3s;
-    }
-
-    section:hover {
-        transform: translateY(-2px);
-
-        box-shadow: 0 12px 35px rgba(15,35,70,0.12);
-    }
-
-    body.dark section {
-        background: rgba(14,28,52,0.96);
-
-        border-color: #20385f;
-
-        border-top-color: #c9a84c;
-
-        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-    }
-
-    section h2 {
-        position: relative;
-
-        margin-top: 0;
-        margin-bottom: 25px;
-
-        padding-bottom: 12px;
-
-        color: #17366b;
-
-        border-bottom: 1px solid #d4dce9;
-    }
-
-    section h2::after {
-        content: "";
-
-        position: absolute;
-
-        left: 0;
-        bottom: -1px;
-
-        width: 70px;
-        height: 3px;
-
-        background-color: #c9a84c;
-    }
-
-    body.dark section h2 {
-        color: #e3c96b;
-
-        border-color: #294368;
-    }
-
-    section p {
-        line-height: 1.7;
-    }
-
-    section strong {
-        color: #17366b;
-    }
-
-    body.dark section strong {
-        color: #e0c66d;
-    }
-
-
-    /* ==============================
-       ABOUT ME
-    ============================== */
-
-    .about-intro {
-        max-width: 760px;
-
-        margin: 0 auto 25px;
-
-        text-align: center;
-    }
-
-    .about-grid {
-        display: grid;
-
-        grid-template-columns: repeat(3, 1fr);
-
-        gap: 18px;
-    }
-
-    .about-box {
-        padding: 23px;
-
-        border-radius: 12px;
-
-        border: 1px solid;
-
-        border-left-width: 5px;
-
-        min-height: 170px;
-    }
-
-    .about-box h3 {
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-
-    .about-box p {
-        margin-bottom: 0;
-
-        color: #4d5a70;
-    }
-
-    .about-education {
-        background: #edf4ff;
-
-        border-color: #b8cbe8;
-
-        border-left-color: #4d78b8;
-    }
-
-    .about-focus {
-        background: #fff8e7;
-
-        border-color: #e7d39b;
-
-        border-left-color: #c9a84c;
-    }
-
-    .about-growth {
-        background: #edf8f4;
-
-        border-color: #b7d8ce;
-
-        border-left-color: #4d9a83;
-    }
-
-    body.dark .about-box p {
-        color: #c7d2e3;
-    }
-
-    body.dark .about-education {
-        background: #142c4e;
-
-        border-color: #2d4f7c;
-
-        border-left-color: #6f9edc;
-    }
-
-    body.dark .about-focus {
-        background: #3b321b;
-
-        border-color: #65552b;
-
-        border-left-color: #d4b45f;
-    }
-
-    body.dark .about-growth {
-        background: #14372f;
-
-        border-color: #2c5d50;
-
-        border-left-color: #65b39b;
-    }
-
-
-    /* ==============================
-       SKILLS
-    ============================== */
-
-    .skills-intro {
-        max-width: 720px;
-
-        margin: -5px auto 25px;
-
-        text-align: center;
-
-        color: #59667a;
-    }
-
-    body.dark .skills-intro {
-        color: #bcc8da;
-    }
-
-    .skill-groups {
-        display: grid;
-
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 18px;
-    }
-
-    .skill-group {
-        padding: 22px;
-
-        border-radius: 12px;
-
-        border: 1px solid;
-
-        border-top: 4px solid;
-
-        min-height: 150px;
-
-        transition: 0.25s;
-    }
-
-    .skill-group:hover {
-        transform: translateY(-3px);
-    }
-
-    .skill-group h3 {
-        margin: 0 0 15px;
-    }
-
-    .skill-list {
-        display: flex;
-
-        flex-wrap: wrap;
-
-        gap: 9px;
-    }
-
-    .skill {
-        padding: 9px 13px;
-
-        border-radius: 18px;
-
-        font-size: 13px;
-
-        font-weight: bold;
-
-        border: 1px solid;
-    }
-
-    .skill-web {
-        background: #edf4ff;
-
-        border-color: #b8cbe8;
-
-        border-top-color: #4d78b8;
-    }
-
-    .skill-web .skill {
-        color: #28548e;
-
-        background: #f8fbff;
-
-        border-color: #b8cbe8;
-    }
-
-    .skill-programming {
-        background: #f3effc;
-
-        border-color: #cfc3e8;
-
-        border-top-color: #8064b5;
-    }
-
-    .skill-programming .skill {
-        color: #634894;
-
-        background: #fbf9ff;
-
-        border-color: #cfc3e8;
-    }
-
-    .skill-database {
-        background: #edf8f7;
-
-        border-color: #b9d9d5;
-
-        border-top-color: #4b938c;
-    }
-
-    .skill-database .skill {
-        color: #36766f;
-
-        background: #f8fffe;
-
-        border-color: #b9d9d5;
-    }
-
-    .skill-tools {
-        background: #fff8e8;
-
-        border-color: #e5d39c;
-
-        border-top-color: #c9a84c;
-    }
-
-    .skill-tools .skill {
-        color: #8a6a16;
-
-        background: #fffdf7;
-
-        border-color: #e5d39c;
-    }
-
-    .skill-learning {
-        background: #edf8f1;
-
-        border-color: #b8d8c1;
-
-        border-top-color: #55966b;
-    }
-
-    .skill-learning .skill {
-        color: #39734d;
-
-        background: #f9fffa;
-
-        border-color: #b8d8c1;
-    }
-
-    body.dark .skill-group {
-        background-color: #132542;
-    }
-
-    body.dark .skill-web {
-        background: #142c4e;
-
-        border-color: #2d4f7c;
-
-        border-top-color: #6f9edc;
-    }
-
-    body.dark .skill-web .skill {
-        color: #b9d5fa;
-
-        background: #10233f;
-
-        border-color: #35557f;
-    }
-
-    body.dark .skill-programming {
-        background: #29223c;
-
-        border-color: #51436f;
-
-        border-top-color: #a98bd9;
-    }
-
-    body.dark .skill-programming .skill {
-        color: #d2bff2;
-
-        background: #211b31;
-
-        border-color: #594a79;
-    }
-
-    body.dark .skill-database {
-        background: #143733;
-
-        border-color: #2c5d57;
-
-        border-top-color: #68b3aa;
-    }
-
-    body.dark .skill-database .skill {
-        color: #a8ddd6;
-
-        background: #102d29;
-
-        border-color: #356c65;
-    }
-
-    body.dark .skill-tools {
-        background: #3b321b;
-
-        border-color: #65552b;
-
-        border-top-color: #d4b45f;
-    }
-
-    body.dark .skill-tools .skill {
-        color: #ecd783;
-
-        background: #302815;
-
-        border-color: #75632e;
-    }
-
-    body.dark .skill-learning {
-        background: #17372a;
-
-        border-color: #32614a;
-
-        border-top-color: #72bd88;
-    }
-
-    body.dark .skill-learning .skill {
-        color: #b6e3c1;
-
-        background: #122c22;
-
-        border-color: #3c7654;
-    }
-
-
-    /* ==============================
-       PROJECTS
-    ============================== */
-
-    .projects {
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 25px;
-    }
-
-    .project {
-        overflow: hidden;
-
-        background-color: #f7f9fc;
-
-        border: 1px solid #d0d9e8;
-
-        border-top: 4px solid #17366b;
-
-        border-radius: 12px;
-
-        transition: 0.3s;
-    }
-
-    .project:hover {
-        transform: translateY(-5px);
-
-        border-top-color: #c9a84c;
-
-        box-shadow: 0 12px 25px rgba(20,50,100,0.14);
-    }
-
-    .project-image {
-        width: 100%;
-
-        background-color: #dfe5ee;
-
-        overflow: hidden;
-    }
-
-    .project-image img {
-        display: block;
-
-        width: 100%;
-
-        height: auto;
+        padding: 75px 5%;
     }
 
     .project-content {
         padding: 22px;
     }
 
-    .project-number {
-        margin-bottom: 8px;
-
-        color: #c9a84c;
-
-        font-size: 11px;
-
-        font-weight: bold;
-
-        letter-spacing: 2px;
+    .contact-container {
+        gap: 20px;
     }
 
-    .project h3 {
-        margin: 0 0 10px;
-
-        color: #17366b;
-
-        font-size: 20px;
+    .chatbot {
+        right: 15px;
+        bottom: 85px;
+        width: calc(100vw - 30px);
     }
 
-    .project p {
-        margin-bottom: 17px;
+    .chat-toggle {
+        right: 15px;
+        bottom: 15px;
+    }
+}
 
-        color: #4a5870;
 
-        line-height: 1.6;
+@media (max-width: 450px) {
+
+    .personal-map {
+        transform: scale(0.52);
     }
 
-    .project-tags {
-        display: flex;
-
-        flex-wrap: wrap;
-
-        gap: 7px;
+    .hero-intro {
+        margin-bottom: 20px;
     }
 
-    .project-tags span {
-        padding: 6px 10px;
-
-        color: #28548e;
-
-        background-color: #edf4ff;
-
-        border: 1px solid #b8cbe8;
-
-        border-radius: 15px;
-
-        font-size: 11px;
-
-        font-weight: bold;
+    .hero-intro h1 {
+        font-size: 36px;
     }
-
-    body.dark .project {
-        background-color: #132542;
-
-        border-color: #294368;
-
-        border-top-color: #c9a84c;
-    }
-
-    body.dark .project-image {
-        background-color: #09172c;
-    }
-
-    body.dark .project h3 {
-        color: #e0c66d;
-    }
-
-    body.dark .project p {
-        color: #c5d0e2;
-    }
-
-    body.dark .project-tags span {
-        color: #b9d5fa;
-
-        background-color: #10233f;
-
-        border-color: #35557f;
-    }
-
-
-    /* ==============================
-       CHATBOT
-    ============================== */
-
-    .chatbot-container {
-        position: fixed;
-
-        right: 25px;
-        bottom: 25px;
-
-        z-index: 99;
-    }
-
-    #chatbot-button {
-        width: 58px;
-        height: 58px;
-
-        border: 1px solid #d4b45f;
-
-        border-radius: 50%;
-
-        color: white;
-
-        background-color: #17366b;
-
-        font-size: 24px;
-
-        cursor: pointer;
-
-        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-
-        transition: 0.3s;
-    }
-
-    #chatbot-button:hover {
-        transform: translateY(-3px);
-
-        background-color: #244d8f;
-    }
-
-    .chatbot-box {
-        position: absolute;
-
-        right: 0;
-        bottom: 70px;
-
-        width: 320px;
-
-        padding: 0;
-
-        overflow: hidden;
-
-        background-color: white;
-
-        border: 1px solid #cbd5e3;
-
-        border-radius: 13px;
-
-        box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-
-        display: none;
-    }
-
-    .chatbot-box.show {
-        display: block;
-    }
-
-    .chatbot-header {
-        display: flex;
-
-        justify-content: space-between;
-
-        align-items: center;
-
-        padding: 15px 17px;
-
-        color: white;
-
-        background-color: #17366b;
-    }
-
-    .chatbot-header strong {
-        display: block;
-    }
-
-    .chatbot-header small {
-        display: block;
-
-        margin-top: 3px;
-
-        color: #cbd8eb;
-
-        font-size: 11px;
-    }
-
-    #chatbot-close {
-        border: none;
-
-        color: white;
-
-        background: none;
-
-        font-size: 22px;
-
-        cursor: pointer;
-    }
-
-    .chatbot-answer {
-        margin: 15px;
-
-        padding: 12px;
-
-        color: #34445c;
-
-        background-color: #f1f5fa;
-
-        border-left: 3px solid #c9a84c;
-
-        border-radius: 7px;
-
-        font-size: 13px;
-
-        line-height: 1.5;
-    }
-
-    .chatbot-questions {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 8px;
-
-        padding: 0 15px 15px;
-    }
-
-    .chat-question {
-        padding: 10px 12px;
-
-        color: #17366b;
-
-        background-color: #f7f9fc;
-
-        border: 1px solid #cbd5e3;
-
-        border-radius: 7px;
-
-        text-align: left;
-
-        font-size: 13px;
-
-        cursor: pointer;
-
-        transition: 0.2s;
-    }
-
-    .chat-question:hover {
-        color: white;
-
-        background-color: #17366b;
-    }
-
-    body.dark .chatbot-box {
-        background-color: #0e1c34;
-
-        border-color: #294368;
-    }
-
-    body.dark .chatbot-header {
-        background-color: #102b54;
-    }
-
-    body.dark .chatbot-answer {
-        color: #d0daea;
-
-        background-color: #132542;
-
-        border-color: #c9a84c;
-    }
-
-    body.dark .chat-question {
-        color: #c9d8ed;
-
-        background-color: #132542;
-
-        border-color: #304b76;
-    }
-
-    body.dark .chat-question:hover {
-        color: #081326;
-
-        background-color: #d4b45f;
-    }
-
-    body.dark #chatbot-button {
-        color: #081326;
-
-        background-color: #d4b45f;
-    }
-
-
-    /* ==============================
-       CONTACT
-    ============================== */
-
-    .contact-info {
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 25px;
-
-        align-items: start;
-    }
-
-    .contact-card {
-        padding: 24px;
-
-        background: #f3f6fb;
-
-        border: 1px solid #d0d9e8;
-
-        border-left: 4px solid #c9a84c;
-
-        border-radius: 10px;
-    }
-
-    body.dark .contact-card {
-        background: #132542;
-
-        border-color: #294368;
-
-        border-left-color: #d4b45f;
-    }
-
-    input,
-    textarea {
-        width: 100%;
-
-        padding: 13px 15px;
-
-        margin-top: 5px;
-        margin-bottom: 17px;
-
-        font-family: Arial, sans-serif;
-
-        font-size: 15px;
-
-        color: #17233d;
-
-        background-color: white;
-
-        border: 1px solid #aebbd0;
-
-        border-radius: 7px;
-
-        outline: none;
-    }
-
-    input:focus,
-    textarea:focus {
-        border-color: #17366b;
-
-        box-shadow: 0 0 0 3px rgba(23,54,107,0.08);
-    }
-
-    input:invalid:not(:placeholder-shown),
-    textarea:invalid:not(:placeholder-shown) {
-        border-color: #b54a4a;
-    }
-
-    input:valid:not(:placeholder-shown),
-    textarea:valid:not(:placeholder-shown) {
-        border-color: #5b9b76;
-    }
-
-    body.dark input,
-    body.dark textarea {
-        color: white;
-
-        background-color: #09172c;
-
-        border-color: #304b76;
-    }
-
-    textarea {
-        height: 130px;
-
-        resize: vertical;
-    }
-
-    form button {
-        padding: 13px 23px;
-
-        font-weight: bold;
-
-        color: white;
-
-        background-color: #17366b;
-
-        border: none;
-
-        border-radius: 7px;
-
-        cursor: pointer;
-
-        transition: 0.25s;
-    }
-
-    form button:hover {
-        background-color: #244d8f;
-
-        transform: translateY(-2px);
-    }
-
-    body.dark form button {
-        color: #081326;
-
-        background-color: #d4b45f;
-    }
-
-
-    /* ==============================
-       SOCIAL LINKS
-    ============================== */
-
-    .social-links {
-        display: flex;
-
-        gap: 10px;
-
-        margin-top: 20px;
-    }
-
-    .social-links a {
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        width: 43px;
-        height: 43px;
-
-        color: white;
-
-        background-color: #17366b;
-
-        border: 1px solid #c9a84c;
-
-        border-radius: 50%;
-
-        font-size: 14px;
-
-        font-weight: bold;
-
-        text-decoration: none;
-
-        transition: 0.25s;
-    }
-
-    .social-links a:hover {
-        color: #081326;
-
-        background-color: #d4b45f;
-
-        transform: translateY(-3px);
-    }
-
-    body.dark .social-links a {
-        color: #081326;
-
-        background-color: #d4b45f;
-    }
-
-    body.dark .social-links a:hover {
-        color: white;
-
-        background-color: #17366b;
-    }
-
-
-    /* ==============================
-       LINKS
-    ============================== */
-
-    a {
-        color: #17366b;
-
-        font-weight: bold;
-
-        text-decoration: none;
-    }
-
-    a:hover {
-        color: #b08b25;
-    }
-
-    body.dark a {
-        color: #d9bd5d;
-    }
-
-
-    /* ==============================
-       MOBILE
-    ============================== */
-
-    @media screen and (max-width: 700px) {
-
-        #darkmd {
-            top: 12px;
-            right: 12px;
-        }
-
-        header {
-            height: auto;
-
-            min-height: 100vh;
-
-            padding: 70px 15px 45px;
-        }
-
-        .hero-intro h1 {
-            font-size: 34px;
-        }
-
-        .hero-intro h2 {
-            font-size: 17px;
-        }
-
-        .personal-map {
-            width: 100%;
-
-            height: auto;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            gap: 12px;
-
-            padding-top: 10px;
-        }
-
-        .profile-center {
-            position: relative;
-
-            left: auto;
-            top: auto;
-
-            transform: none;
-
-            width: 180px;
-            height: 180px;
-
-            margin: 25px 0;
-        }
-
-        .profile-center img {
-            width: 155px;
-            height: 155px;
-        }
-
-        .profile-center::before,
-        .profile-center::after,
-        .branch {
-            display: none;
-        }
-
-        .map-node {
-            position: relative;
-
-            left: auto !important;
-            right: auto !important;
-            top: auto !important;
-            bottom: auto !important;
-
-            width: 190px;
-        }
-
-        .hero-note {
-            position: relative;
-
-            bottom: auto;
-
-            left: auto;
-
-            transform: none;
-
-            display: block;
-
-            text-align: center;
-
-            margin-top: 25px;
-        }
-
-        section {
-            min-height: auto;
-
-            margin: 25px 10px;
-
-            padding: 35px 20px;
-
-            display: block;
-        }
-
-        .about-grid,
-        .skill-groups,
-        .contact-info {
-            grid-template-columns: 1fr;
-        }
-
-        .projects {
-            grid-template-columns: 1fr;
-        }
-
-        .chatbot-container {
-            right: 15px;
-            bottom: 15px;
-        }
-
-        .chatbot-box {
-            right: 0;
-
-            width: calc(100vw - 30px);
-
-            max-width: 320px;
-        }
-    }
+}
 
 </style>
+
 
 </head>
 
 <body>
-
-<button id="darkmd">Dark Mode</button>
-
-
-<!-- ==============================
-     HOME
-============================== -->
-
-<header id="home">
-
-    <div class="hero-intro">
-
-        <div class="hero-label">
-            PERSONAL PORTFOLIO
-        </div>
-
-        <h1>
-            John Christian D Mea
-        </h1>
-
-        <h2>
-            BS Computer Science Student
-        </h2>
-
-        <p>
-            Currently learning programming concepts such as web development,
-            databases, and other areas of Computer Science.
-        </p>
-
-    </div>
-
-
-    <div class="personal-map">
-
-        <div class="branch branch-about"></div>
-
-        <div class="branch branch-skills"></div>
-
-        <div class="branch branch-projects"></div>
-
-        <div class="branch branch-contact"></div>
-
-
-        <a href="#about" class="map-node node-about">
-            About Me
-        </a>
-
-        <a href="#skills" class="map-node node-skills">
-            Skills
-        </a>
-
-
-        <div class="profile-center">
-
-            <img
-                src="Profile-Pic.jpg"
-                alt="John Christian D Mea"
-            >
-
-        </div>
-
-
-        <a href="#projects" class="map-node node-projects">
-            Projects
-        </a>
-
-        <a href="#contact" class="map-node node-contact">
-            Contact
-        </a>
-
-    </div>
-
-
-    <div class="hero-note">
-        Explore the path
-    </div>
-
-</header>
-
-
-<!-- ==============================
-     ABOUT ME
-============================== -->
-
-<section id="about">
-
-    <h2>
-        About Me
-    </h2>
-
-    <div class="about-intro">
-
-        <p>
-            I am a BS Computer Science student currently building my
-            programming knowledge through school projects and personal practice.
-        </p>
-
-    </div>
-
-
-    <div class="about-grid">
-
-        <div class="about-box about-education">
-
-            <h3>
-                Education
-            </h3>
-
-            <p>
-                BS Computer Science<br>
-                2nd Year Student
-            </p>
-
-        </div>
-
-
-        <div class="about-box about-focus">
-
-            <h3>
-                Current Focus
-            </h3>
-
-            <p>
-                Learning programming, web development, databases,
-                and problem-solving through practical projects.
-            </p>
-
-        </div>
-
-
-        <div class="about-box about-growth">
-
-            <h3>
-                Growth
-            </h3>
-
-            <p>
-                Developing my ability to learn new technologies,
-                adapt to changes, and improve through experience.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==============================
-     SKILLS
-============================== -->
-
-<section id="skills">
-
-    <h2>
-        Skills
-    </h2>
-
-    <p class="skills-intro">
-        A collection of technologies and areas I have worked with so far
-        as a Computer Science student.
-    </p>
-
-
-    <div class="skill-groups">
-
-        <div class="skill-group skill-web">
-
-            <h3>
-                Web Development
-            </h3>
-
-            <div class="skill-list">
-
-                <span class="skill">
-                    HTML
-                </span>
-
-                <span class="skill">
-                    CSS
-                </span>
-
-                <span class="skill">
-                    JavaScript
-                </span>
-
-                <span class="skill">
-                    PHP
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-group skill-programming">
-
-            <h3>
-                Programming
-            </h3>
-
-            <div class="skill-list">
-
-                <span class="skill">
-                    Python
-                </span>
-
-                <span class="skill">
-                    JavaScript
-                </span>
-
-                <span class="skill">
-                    PHP
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-group skill-database">
-
-            <h3>
-                Database
-            </h3>
-
-            <div class="skill-list">
-
-                <span class="skill">
-                    MySQL
-                </span>
-
-                <span class="skill">
-                    SQL
-                </span>
-
-                <span class="skill">
-                    Supabase
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-group skill-tools">
-
-            <h3>
-                Tools
-            </h3>
-
-            <div class="skill-list">
-
-                <span class="skill">
-                    VS Code
-                </span>
-
-                <span class="skill">
-                    GitHub
-                </span>
-
-                <span class="skill">
-                    Laragon
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-group skill-learning">
-
-            <h3>
-                Currently Learning
-            </h3>
-
-            <div class="skill-list">
-
-                <span class="skill">
-                    Data Structures
-                </span>
-
-                <span class="skill">
-                    Algorithms
-                </span>
-
-                <span class="skill">
-                    Backend Development
-                </span>
-
-                <span class="skill">
-                    Git
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==============================
-     PROJECTS
-============================== -->
-
-<section id="projects">
-
-    <h2>
-        Projects
-    </h2>
-
-
-    <div class="projects">
-
-
-        <div class="project">
-
-            <div class="project-image">
-
-                <img
-                    src="Project1.png"
-                    alt="Automotive Shop Inventory System"
-                >
-
-            </div>
-
-
-            <div class="project-content">
-
-                <div class="project-number">
-                    PROJECT 01
-                </div>
-
-                <h3>
-                    Automotive Shop Inventory System
-                </h3>
-
-                <p>
-                    An inventory system designed to help an automotive shop
-                    organize products and make information easier to find.
-                </p>
-
-                <div class="project-tags">
-
-                    <span>
-                        Inventory
-                    </span>
-
-                    <span>
-                        Database
-                    </span>
-
-                    <span>
-                        Web Development
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="project">
-
-            <div class="project-image">
-
-                <img
-                    src="Project2.png"
-                    alt="LCC Payroll System"
-                >
-
-            </div>
-
-
-            <div class="project-content">
-
-                <div class="project-number">
-                    PROJECT 02
-                </div>
-
-                <h3>
-                    Payroll System
-                </h3>
-
-                <p>
-                    A payroll and employee management system designed to
-                    organize employee information and payroll-related records.
-                </p>
-
-                <div class="project-tags">
-
-                    <span>
-                        PHP
-                    </span>
-
-                    <span>
-                        Database
-                    </span>
-
-                    <span>
-                        Employee Management
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- ==============================
-     FLOATING CHATBOT
-============================== -->
-
-<div class="chatbot-container">
-
-    <button id="chatbot-button">
-        💬
+    <div id="theme-transition"></div>
+
+    <button id="darkmd">
+        <i class="fa-solid fa-moon"></i>
+        Dark Mode
     </button>
 
 
-    <div class="chatbot-box" id="chatbot-box">
+    <!-- ==============================
+         HOME
+    ============================== -->
 
-        <div class="chatbot-header">
+    <section id="home">
 
-            <div>
+        <div class="hero-intro">
 
-                <strong>
-                    Ask About Me
-                </strong>
+            <h1>John Christian D Mea</h1>
 
-                <small>
-                    Portfolio Assistant
-                </small>
+            <h2>BS Computer Science Student</h2>
+
+            <p>
+                I am a second-year Computer Science student developing my skills
+                in programming, web development, databases, and problem-solving.
+                I enjoy breaking problems into smaller parts and building systems
+                with a clear structure.
+            </p>
+
+        </div>
+
+
+        <div class="personal-map">
+
+            <!-- ORIGINAL-STYLE BRANCH LINES -->
+
+            <div class="branch branch-about"></div>
+            <div class="branch branch-skills"></div>
+            <div class="branch branch-works"></div>
+            <div class="branch branch-experience"></div>
+            <div class="branch branch-contact"></div>
+
+
+            <!-- CENTER PROFILE -->
+
+            <div class="profile-center">
+                <img src="Profile-Pic.jpg" alt="John Christian D Mea">
+            </div>
+
+
+            <!-- NODES -->
+
+            <a href="#about" class="map-node node-about">
+                <i class="fa-solid fa-user"></i>
+                About Me
+            </a>
+
+            <a href="#skills" class="map-node node-skills">
+                <i class="fa-solid fa-code"></i>
+                Skills
+            </a>
+
+            <a href="#projects"
+               class="map-node node-works">
+
+                <i class="fa-solid fa-folder-open"></i>
+                My Works
+
+            </a>
+
+            <div class="map-node node-experience experience-node">
+
+                <i class="fa-solid fa-briefcase"></i>
+                Experience
 
             </div>
 
-            <button id="chatbot-close">
-                ×
-            </button>
+            <a href="#contact"
+               class="map-node node-contact">
+
+                <i class="fa-solid fa-envelope"></i>
+                Contact
+
+            </a>
 
         </div>
 
+    </section>
 
-        <div class="chatbot-answer" id="chatbot-answer">
 
-            Hi! What would you like to know about me?
+
+    <!-- ==============================
+         ABOUT
+    ============================== -->
+
+    <section id="about">
+
+        <h2 class="section-title">About Me</h2>
+
+        <p class="section-subtitle">
+            A little about where I am, what I am currently working on,
+            and how I am developing as a Computer Science student.
+        </p>
+
+
+        <div class="about-grid">
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <h3>Education</h3>
+
+                <p>
+                    I am currently a
+                    <strong>second-year BS Computer Science student</strong>
+                    at Lipa City Colleges.
+                    My studies have given me experience with programming,
+                    databases, web development, and basic software development.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-laptop-code"></i>
+
+                <h3>Current Focus</h3>
+
+                <p>
+                    Right now, I am focused on improving how I approach
+                    programming problems rather than simply making code work.
+                    I am learning to understand the problem first, break it
+                    into smaller parts, and build the solution step by step.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-arrow-trend-up"></i>
+
+                <h3>Growth</h3>
+
+                <p>
+                    Most of my experience so far has come from school projects.
+                    Each project gives me another opportunity to practice,
+                    debug mistakes, organize information, and understand
+                    how different parts of a system work together.
+                </p>
+
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="chatbot-questions">
 
-            <button
-                class="chat-question"
-                data-answer="My current skills include HTML, CSS, JavaScript, PHP, Python, MySQL, SQL, and basic web development."
-            >
+
+    <!-- ==============================
+         SKILLS
+    ============================== -->
+
+    <section id="skills">
+
+        <h2 class="section-title">Skills</h2>
+
+        <p class="section-subtitle">
+            Technologies and areas I have been working with through
+            coursework and personal projects.
+        </p>
+
+
+        <div class="skills-container">
+
+
+            <!-- WEB DEVELOPMENT -->
+
+            <div class="skill-group">
+
+                <h3>
+                    <i class="fa-solid fa-globe"></i>
+                    Web Development
+                </h3>
+
+                <p>
+                    Building and styling web pages while learning how
+                    structure, design, and interaction work together.
+                </p>
+
+                <div class="skill-tags">
+
+                    <span class="tag">
+                        <i class="fa-brands fa-html5"></i>
+                        HTML
+                    </span>
+
+                    <span class="tag">
+                        <i class="fa-brands fa-css3-alt"></i>
+                        CSS
+                    </span>
+
+                    <span class="tag">
+                        <i class="fa-brands fa-js"></i>
+                        JavaScript
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRAMMING -->
+
+            <div class="skill-group">
+
+                <h3>
+                    <i class="fa-solid fa-terminal"></i>
+                    Programming
+                </h3>
+
+                <p>
+                    Writing programs and practicing how to break problems
+                    down into smaller, manageable steps.
+                </p>
+
+                <div class="skill-tags">
+
+                    <span class="tag">
+                        <i class="fa-brands fa-php"></i>
+                        PHP
+                    </span>
+
+                    <span class="tag">
+                        <i class="fa-brands fa-python"></i>
+                        Python
+                    </span>
+
+                    <span class="tag">
+                        JavaScript
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATABASE -->
+
+            <div class="skill-group">
+
+                <h3>
+                    <i class="fa-solid fa-database"></i>
+                    Database Management
+                </h3>
+
+                <p>
+                    Working with structured information and learning how
+                    applications interact with stored data.
+                </p>
+
+                <div class="skill-tags">
+
+                    <span class="tag">
+                        <i class="fa-solid fa-database"></i>
+                        MySQL
+                    </span>
+
+                    <span class="tag">
+                        SQL
+                    </span>
+
+                    <span class="tag">
+                        Supabase
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOOLS -->
+
+            <div class="skill-group">
+
+                <h3>
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    Tools
+                </h3>
+
+                <p>
+                    Tools I have used while developing school projects
+                    and managing my code.
+                </p>
+
+                <div class="skill-tags">
+
+                    <span class="tag">
+                        <i class="fa-solid fa-code"></i>
+                        VS Code
+                    </span>
+
+                    <span class="tag">
+                        <i class="fa-brands fa-github"></i>
+                        GitHub
+                    </span>
+
+                    <span class="tag">
+                        Laragon
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SMALLER CURRENTLY LEARNING -->
+
+            <div class="currently-learning">
+
+                <h3>
+                    <i class="fa-solid fa-book-open"></i>
+                    Currently Learning
+                </h3>
+
+                <div class="skill-tags">
+
+                    <span class="tag">
+                        More JavaScript
+                    </span>
+
+                    <span class="tag">
+                        Better Database Design
+                    </span>
+
+                    <span class="tag">
+                        More Advanced Programming
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         PROJECTS
+    ============================== -->
+
+    <section id="projects">
+
+        <h2 class="section-title">My Works</h2>
+
+        <p class="section-subtitle">
+            Some of the systems I have worked on through my Computer Science
+            coursework.
+        </p>
+
+
+        <div class="projects-container">
+
+
+            <!-- PROJECT 1 -->
+
+            <div class="project-card">
+
+                <div class="project-image">
+
+                    <img src="Project1.png"
+                         alt="Automotive Shop Inventory System">
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <div class="project-number">
+                        
+                    </div>
+
+                    <h3>Automotive Shop Inventory System</h3>
+
+                    <p class="project-description">
+                        An inventory system designed to organize product
+                        information and make inventory-related records
+                        easier to manage.
+                    </p>
+
+
+                    <div class="problem">
+
+                        <h4>Problem</h4>
+
+                        <p>
+                            Product information and inventory records can
+                            become difficult to manage when they are not
+                            organized in one system.
+                        </p>
+
+                    </div>
+
+
+                    <div class="solution">
+
+                        <h4>Solution</h4>
+
+                        <p>
+                            The system provides a structured way to store
+                            product information and manage inventory records,
+                            making the information easier to view and update.
+                        </p>
+
+                    </div>
+
+
+                    <div class="project-tags">
+
+                        <span>
+                            <i class="fa-brands fa-html5"></i>
+                            HTML
+                        </span>
+
+                        <span>
+                            <i class="fa-brands fa-css3-alt"></i>
+                            CSS
+                        </span>
+
+                        <span>
+                            <i class="fa-brands fa-js"></i>
+                            JavaScript
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-database"></i>
+                            Database
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROJECT 2 -->
+
+            <div class="project-card">
+
+                <div class="project-image">
+
+                    <img src="Project2.png"
+                         alt="Payroll System">
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <div class="project-number">
+                        
+                    </div>
+
+                    <h3>Payroll System</h3>
+
+                    <p class="project-description">
+                        A payroll-related system for organizing employee
+                        information, departments, positions, and
+                        salary-related data.
+                    </p>
+
+
+                    <div class="problem">
+
+                        <h4>Problem</h4>
+
+                        <p>
+                            Employee information can involve multiple pieces
+                            of data such as departments, positions, and
+                            salary details that need to stay organized.
+                        </p>
+
+                    </div>
+
+
+                    <div class="solution">
+
+                        <h4>Solution</h4>
+
+                        <p>
+                            The system brings these records together in a
+                            structured database so employee information and
+                            payroll-related data can be managed more clearly.
+                        </p>
+
+                    </div>
+
+
+                    <div class="project-tags">
+
+                        <span>
+                            <i class="fa-brands fa-php"></i>
+                            PHP
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-database"></i>
+                            MySQL
+                        </span>
+
+                        <span>
+                            <i class="fa-brands fa-html5"></i>
+                            HTML
+                        </span>
+
+                        <span>
+                            <i class="fa-brands fa-css3-alt"></i>
+                            CSS
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         CONTACT
+    ============================== -->
+
+    <section id="contact">
+
+        <h2 class="section-title">Contact</h2>
+
+        <p class="section-subtitle">
+            If you would like to know more about my work, projects,
+            or what I am currently learning, feel free to reach out.
+        </p>
+
+
+        <div class="contact-container">
+
+
+            <!-- CONTACT INFORMATION -->
+
+            <div class="contact-card">
+
+                <h3>Let's Connect</h3>
+
+                <p>
+                    I am always open to connecting with people interested
+                    in technology, programming, and the projects I am
+                    currently working on.
+                </p>
+
+
+                <div class="contact-info">
+
+                    <a href="mailto:cristianmea27@gmail.com"
+                       class="contact-link">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <div>
+                            <small>Email</small>
+                            <span>cristianmea27@gmail.com</span>
+                        </div>
+
+                    </a>
+
+
+                    <a href="https://github.com/cristianmea27-a11y"
+                       target="_blank"
+                       class="contact-link">
+
+                        <i class="fa-brands fa-github"></i>
+
+                        <div>
+                            <small>GitHub</small>
+                            <span>cristianmea27-a11y</span>
+                        </div>
+
+                    </a>
+
+
+                    <a href="https://www.facebook.com/johnchristian.mea"
+                       target="_blank"
+                       class="contact-link">
+
+                        <i class="fa-brands fa-facebook"></i>
+
+                        <div>
+                            <small>Facebook</small>
+                            <span>John Christian D Mea</span>
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTACT FORM -->
+
+            <div class="contact-card">
+
+                <h3>Send a Message</h3>
+
+                <form class="contact-form"
+                      onsubmit="sendMessage(event)">
+
+                    <div>
+
+                        <label for="name">
+                            Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            placeholder="Write your message..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button type="submit">
+                        Send Message
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         CHATBOT
+    ============================== -->
+
+    <button class="chat-toggle"
+            onclick="toggleChat()"
+            aria-label="Open chatbot">
+        <i class="fa-solid fa-comments"></i>
+    </button>
+
+    <div class="chatbot" id="chatbot">
+
+        <div class="chat-header">
+            <strong>Ask About Me</strong>
+            <small>Ask about my studies, skills, or projects.</small>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+
+            <div class="chat-message bot-message">
+                Hi! You can ask me about my skills, projects, or what I am studying.
+            </div>
+
+        </div>
+
+        <div class="chat-questions">
+
+            <button class="chat-question"
+                    onclick="askQuestion('What are your skills?')">
                 What are your skills?
             </button>
 
-
-            <button
-                class="chat-question"
-                data-answer="My main projects are an Automotive Shop Inventory System and an LCC Payroll System."
-            >
+            <button class="chat-question"
+                    onclick="askQuestion('What are your projects?')">
                 What are your projects?
             </button>
 
-
-            <button
-                class="chat-question"
-                data-answer="I am currently a 2nd-year BS Computer Science student."
-            >
+            <button class="chat-question"
+                    onclick="askQuestion('What are you studying?')">
                 What are you studying?
             </button>
 
-
-            <button
-                class="chat-question"
-                data-answer="Some of the tools I work with are VS Code, GitHub, and Laragon."
-            >
-                What tools do you use?
+            <button class="chat-question"
+                    onclick="askQuestion('What are you currently learning?')">
+                What are you learning?
             </button>
 
         </div>
 
     </div>
 
-</div>
+
+    <!-- ==============================
+         JAVASCRIPT
+    ============================== -->
+
+    <script>
+
+        /* DARK MODE */
+        
+        /* =========================================
+            DARK MODE TRANSITION
+            ========================================= */
+
+            const darkButton =
+                document.getElementById("darkmd");
+
+            const themeTransition =
+                document.getElementById("theme-transition");
+
+            const hub =
+                document.querySelector(".profile-center");
+
+            let themeAnimating = false;
 
 
-<!-- ==============================
-     CONTACT
-============================== -->
+            /* =========================================
+            DARK MODE BUTTON
+            ========================================= */
 
-<section id="contact">
+            darkButton.addEventListener("click", function () {
 
-    <h2>
-        Contact Me
-    </h2>
+                if (themeAnimating) {
+                    return;
+                }
 
+                themeAnimating = true;
 
-    <div class="contact-info">
-
-
-        <div class="contact-card">
-
-            <h3>
-                Get in Touch
-            </h3>
+                document.body.classList.add(
+                    "theme-animating"
+                );
 
 
-            <p>
+                /* =====================================
+                FIND PROFILE PICTURE
+                ===================================== */
 
-                Email:
+                const hubRect =
+                    hub.getBoundingClientRect();
 
-                <a href="mailto:cristianmea27@gmail.com">
-                    cristianmea27@gmail.com
-                </a>
+                const x =
+                    hubRect.left +
+                    (hubRect.width / 2);
 
-            </p>
-
-
-            <div class="social-links">
-
-                <a
-                    href="https://github.com/cristianmea27-a11y"
-                    target="_blank"
-                    title="GitHub"
-                >
-                    GH
-                </a>
+                const y =
+                    hubRect.top +
+                    (hubRect.height / 2);
 
 
-                <a
-                    title="LinkedIn"
-                >
-                    in
-                </a>
+                /* =====================================
+                CALCULATE HOW LARGE THE CIRCLE
+                NEEDS TO BECOME
+                ===================================== */
+
+                const topLeft =
+                    Math.hypot(x, y);
+
+                const topRight =
+                    Math.hypot(
+                        window.innerWidth - x,
+                        y
+                    );
+
+                const bottomLeft =
+                    Math.hypot(
+                        x,
+                        window.innerHeight - y
+                    );
+
+                const bottomRight =
+                    Math.hypot(
+                        window.innerWidth - x,
+                        window.innerHeight - y
+                    );
 
 
-                <a
-                    href="https://www.facebook.com/johnchristian.mea"
-                    target="_blank"
-                    title="Facebook"
-                >
-                    f
-                </a>
-
-            </div>
-
-        </div>
+                const radius =
+                    Math.max(
+                        topLeft,
+                        topRight,
+                        bottomLeft,
+                        bottomRight
+                    ) + 50;
 
 
-        <div class="contact-card">
+                /*
+                    The transition circle is 100px wide.
 
-            <h3>
-                Send a Message
-            </h3>
+                    Its radius is therefore 50px.
 
+                    This calculates how many times
+                    we need to enlarge it.
+                */
 
-            <form
-                onsubmit="return showMessage();"
-            >
-
-                <label for="name">
-                    Name:
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                    required
-                    minlength="2"
-                >
+                const scale =
+                    radius / 50;
 
 
-                <label for="email">
-                    Email:
-                </label>
+                /* =====================================
+                PUT THE CIRCLE AT THE PROFILE
+                ===================================== */
 
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                >
+                themeTransition.style.left =
+                    x + "px";
 
+                themeTransition.style.top =
+                    y + "px";
 
-                <label for="message">
-                    Message:
-                </label>
-
-                <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Enter your message"
-                    required
-                    minlength="5"
-                ></textarea>
+                themeTransition.style.setProperty(
+                    "--transition-scale",
+                    scale
+                );
 
 
-                <button type="submit">
-                    Send Message
-                </button>
+                /* =====================================
+                LIGHT → DARK
+                ===================================== */
 
-            </form>
+                if (
+                    !document.body.classList.contains("dark")
+                ) {
 
-        </div>
+                    /*
+                        Reset the transition first.
+                    */
 
-    </div>
+                    themeTransition.classList.remove(
+                        "retract"
+                    );
 
-</section>
+                    themeTransition.classList.remove(
+                        "expand"
+                    );
 
-<script>
+                    themeTransition.style.opacity =
+                        "1";
 
-    /* ==============================
-       DARK MODE
-    ============================== */
+                    themeTransition.style.transform =
+                        "translate(-50%, -50%) scale(0.05)";
 
-    var button = document.getElementById("darkmd");
 
-    button.addEventListener("click", function() {
+                    /*
+                        Force the browser to register
+                        the starting position.
+                    */
 
-        document.body.classList.toggle("dark");
+                    void themeTransition.offsetWidth;
 
-        if (document.body.classList.contains("dark")) {
 
-            button.textContent = "Light Mode";
+                    /*
+                        Start the gold-ring expansion.
+                    */
 
-        } else {
+                    themeTransition.classList.add(
+                        "expand"
+                    );
 
-            button.textContent = "Dark Mode";
+
+                    /*
+                        Wait until the dark circle has
+                        covered the entire screen.
+                    */
+
+                    setTimeout(function () {
+
+                        /*
+                            CHANGE THE ACTUAL PAGE THEME
+                            WHILE THE SCREEN IS HIDDEN
+                        */
+
+                        document.body.classList.add(
+                            "dark"
+                        );
+
+                        darkButton.innerHTML =
+                            '<i class="fa-solid fa-sun"></i> Light Mode';
+
+                    }, 850);
+
+
+                    /*
+                        After the theme has changed,
+                        remove the transition circle.
+
+                        Because the page is already dark,
+                        the user sees a seamless result.
+                    */
+
+                    setTimeout(function () {
+
+                        themeTransition.style.opacity =
+                            "0";
+
+                    }, 1150);
+
+
+                    /*
+                        Reset everything.
+                    */
+
+                    setTimeout(function () {
+
+                        themeTransition.classList.remove(
+                            "expand"
+                        );
+
+                        themeTransition.style.transform =
+                            "translate(-50%, -50%) scale(0)";
+
+                        document.body.classList.remove(
+                            "theme-animating"
+                        );
+
+                        themeAnimating = false;
+
+                    }, 1350);
+                }
+
+
+                /* =====================================
+                DARK → LIGHT
+                ===================================== */
+
+                else {
+
+                    /*
+                        Start with the circle already
+                        covering the entire screen.
+                    */
+
+                    themeTransition.classList.remove(
+                        "expand"
+                    );
+
+                    themeTransition.classList.remove(
+                        "retract"
+                    );
+
+                    themeTransition.style.opacity =
+                        "1";
+
+                    themeTransition.style.transform =
+                        `translate(-50%, -50%) scale(${scale})`;
+
+
+                    /*
+                        Force browser to register
+                        the starting position.
+                    */
+
+                    void themeTransition.offsetWidth;
+
+
+                    /*
+                        CHANGE THE PAGE TO LIGHT MODE
+                        WHILE THE DARK CIRCLE STILL
+                        COVERS EVERYTHING.
+                    */
+
+                    document.body.classList.remove(
+                        "dark"
+                    );
+
+                    darkButton.innerHTML =
+                        '<i class="fa-solid fa-moon"></i> Dark Mode';
+
+
+                    /*
+                        Now shrink the dark circle
+                        back into the profile picture.
+                    */
+
+                    themeTransition.classList.add(
+                        "retract"
+                    );
+
+
+                    /*
+                        Finish.
+                    */
+
+                    setTimeout(function () {
+
+                        themeTransition.style.opacity =
+                            "0";
+
+                    }, 1000);
+
+
+                    setTimeout(function () {
+
+                        themeTransition.classList.remove(
+                            "retract"
+                        );
+
+                        themeTransition.style.transform =
+                            "translate(-50%, -50%) scale(0)";
+
+                        document.body.classList.remove(
+                            "theme-animating"
+                        );
+
+                        themeAnimating = false;
+
+                    }, 1350);
+                }
+
+            });
+        
+        /* CONTACT FORM */
+
+        function sendMessage(event) {
+
+            event.preventDefault();
+
+            alert(
+                "Your message form is working, but sending messages through email is not connected yet."
+            );
 
         }
 
-    });
 
 
-    /* ==============================
-       CHATBOT
-    ============================== */
+        /* CHATBOT */
 
-    var chatbotButton =
-        document.getElementById("chatbot-button");
+        function toggleChat() {
 
-    var chatbotBox =
-        document.getElementById("chatbot-box");
+            const chatbot =
+                document.getElementById("chatbot");
 
-    var chatbotClose =
-        document.getElementById("chatbot-close");
+            chatbot.classList.toggle("active");
+
+        }
 
 
-    chatbotButton.addEventListener("click", function() {
+        function askQuestion(question) {
 
-        chatbotBox.classList.toggle("show");
-
-    });
-
-
-    chatbotClose.addEventListener("click", function() {
-
-        chatbotBox.classList.remove("show");
-
-    });
+            const messages =
+                document.getElementById("chatMessages");
 
 
-    var questions =
-        document.querySelectorAll(".chat-question");
+            /* USER MESSAGE */
 
-    var chatbotAnswer =
-        document.getElementById("chatbot-answer");
+            const userMessage =
+                document.createElement("div");
 
+            userMessage.className =
+                "chat-message user-message";
 
-    questions.forEach(function(question) {
+            userMessage.textContent =
+                question;
 
-        question.addEventListener("click", function() {
+            messages.appendChild(userMessage);
 
-            chatbotAnswer.textContent =
-                question.getAttribute("data-answer");
-
-        });
-
-    });
+            messages.scrollTop =
+                messages.scrollHeight;
 
 
-    /* ==============================
-       CONTACT FORM
-    ============================== */
+            /* TYPING */
 
-    function showMessage() {
+            const typing =
+                document.createElement("div");
 
-        alert(
-            "The form is working, but message sending has not been connected yet."
-        );
+            typing.className =
+                "typing";
 
-        return false;
+            typing.textContent =
+                "Typing...";
 
-    }
+            messages.appendChild(typing);
 
-</script>
+            messages.scrollTop =
+                messages.scrollHeight;
+
+
+            /* BOT RESPONSE */
+
+            setTimeout(function () {
+
+                typing.remove();
+
+                const botMessage =
+                    document.createElement("div");
+
+                botMessage.className =
+                    "chat-message bot-message";
+
+
+                if (question === "What are your skills?") {
+
+                    botMessage.textContent =
+                        "My main skills include web development, PHP programming, JavaScript, database management, and debugging. I have also worked with Python, MySQL, Supabase, GitHub, and Laragon.";
+
+                }
+
+
+                else if (question === "What are your projects?") {
+
+                    botMessage.textContent =
+                        "I have worked on an Automotive Shop Inventory System and a Payroll System. Both projects helped me practice organizing information and building systems around specific problems.";
+
+                }
+
+
+                else if (question === "What are you studying?") {
+
+                    botMessage.textContent =
+                        "I am currently a second-year BS Computer Science student. My coursework includes programming, databases, web development, and other areas of computer science.";
+
+                }
+
+
+                else if (question === "What are you currently learning?") {
+
+                    botMessage.textContent =
+                        "I am currently improving my JavaScript, database design, and general programming skills while continuing to work on school projects.";
+
+                }
+
+
+                messages.appendChild(botMessage);
+
+                messages.scrollTop =
+                    messages.scrollHeight;
+
+            }, 900);
+
+        }
+
+    </script>
 
 </body>
 
 </html>
+
+.chatbot
+
+.profile-center {
